@@ -1,0 +1,32 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Clean.CORE.Entities;
+
+namespace Clean.DATA.Data
+{
+    public class DataContext : IDataContext
+    {
+        public DataContext(DbContextOptions<DataContext> options) : base(options) { }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Project>().HasData(
+                new Project { Id = 1, Name = "מערכת ניהול מלאי", Description = "בניית מערכת למעקב אחרי מלאים" },
+                new Project { Id = 2, Name = "אתר מכירות", Description = "פיתוח אתר למכירת מוצרים" }
+            );
+
+            modelBuilder.Entity<Employee>().HasData(
+                new Employee { Id = 1, FullName = "דנה לוי", Role = "מפתחת" },
+                new Employee { Id = 2, FullName = "יואב שמש", Role = "בודק תוכנה" }
+            );
+
+            modelBuilder.Entity<ProjectAssignment>().HasData(
+                new ProjectAssignment { Id = 1, ProjectId = 1, EmployeeId = 1, EmployeeRoleInProject = "פיתוח צד שרת" }
+            );
+        }
+    }
+}
+
+
+

@@ -1,0 +1,28 @@
+﻿using System.Collections.Generic;
+using Clean.DATA.Repositories;
+using Clean.Core.Entities;
+
+namespace Clean.SERVICE
+{
+    public class ProjectAssignmentService
+    {
+        private readonly ProjectAssignmentRepository _repository;
+
+        public ProjectAssignmentService(ProjectAssignmentRepository repository)
+        {
+            _repository = repository;
+        }
+
+        public List<ProjectAssignment> GetAll() => _repository.GetAllAssignments();
+
+        public ProjectAssignment? GetById(int id) => _repository.GetAssignmentById(id);
+
+        public ProjectAssignment Add(ProjectAssignment assignment) => _repository.AddAssignment(assignment);
+
+        public ProjectAssignment? Update(int id, ProjectAssignment updated) => _repository.UpdateAssignment(id, updated);
+
+        public bool Delete(int id) => _repository.DeleteAssignment(id);
+
+        public List<ProjectAssignment> GetByProject(int projectId) => _repository.GetAssignmentsByProject(projectId);
+    }
+}

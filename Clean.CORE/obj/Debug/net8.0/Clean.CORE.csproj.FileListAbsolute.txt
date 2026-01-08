@@ -1,0 +1,11 @@
+C:\Users\keshe\Desktop\דוטנט\פרויקט\WebApplication1\Clean.CORE\bin\Debug\net8.0\Clean.CORE.deps.json
+C:\Users\keshe\Desktop\דוטנט\פרויקט\WebApplication1\Clean.CORE\bin\Debug\net8.0\Clean.CORE.dll
+C:\Users\keshe\Desktop\דוטנט\פרויקט\WebApplication1\Clean.CORE\bin\Debug\net8.0\Clean.CORE.pdb
+C:\Users\keshe\Desktop\דוטנט\פרויקט\WebApplication1\Clean.CORE\obj\Debug\net8.0\Clean.CORE.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\keshe\Desktop\דוטנט\פרויקט\WebApplication1\Clean.CORE\obj\Debug\net8.0\Clean.CORE.AssemblyInfoInputs.cache
+C:\Users\keshe\Desktop\דוטנט\פרויקט\WebApplication1\Clean.CORE\obj\Debug\net8.0\Clean.CORE.AssemblyInfo.cs
+C:\Users\keshe\Desktop\דוטנט\פרויקט\WebApplication1\Clean.CORE\obj\Debug\net8.0\Clean.CORE.csproj.CoreCompileInputs.cache
+C:\Users\keshe\Desktop\דוטנט\פרויקט\WebApplication1\Clean.CORE\obj\Debug\net8.0\Clean.CORE.dll
+C:\Users\keshe\Desktop\דוטנט\פרויקט\WebApplication1\Clean.CORE\obj\Debug\net8.0\refint\Clean.CORE.dll
+C:\Users\keshe\Desktop\דוטנט\פרויקט\WebApplication1\Clean.CORE\obj\Debug\net8.0\Clean.CORE.pdb
+C:\Users\keshe\Desktop\דוטנט\פרויקט\WebApplication1\Clean.CORE\obj\Debug\net8.0\ref\Clean.CORE.dll

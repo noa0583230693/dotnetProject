@@ -1,0 +1,64 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using Clean.CORE.Entities;
+using Clean.DATA.Data;
+
+namespace Clean.DATA.Repositories
+{
+    public class ProjectAssignmentRepository
+    {
+        private readonly IDataContext _context;
+
+        public ProjectAssignmentRepository(IDataContext context)
+        {
+            _context = context;
+        }
+
+        public List<ProjectAssignment> GetAllAssignments()
+        {
+            return _context.Assignments.ToList();
+        }
+
+        public ProjectAssignment? GetAssignmentById(int id)
+        {
+            return _context.Assignments.FirstOrDefault(a => a.Id == id);
+        }
+
+        public ProjectAssignment AddAssignment(ProjectAssignment assignment)
+        {
+            var nextId = _context.Assignments.Any() ? _context.Assignments.Max(a => a.Id) + 1 : 1;
+            assignment.Id = nextId;
+            _context.Assignments.Add(assignment);
+            return assignment;
+        }
+
+        public ProjectAssignment? UpdateAssignment(int id, ProjectAssignment updated)
+        {
+            var assignment = _context.Assignments.FirstOrDefault(a => a.Id == id);
+            if (assignment == null)
+                return null;
+
+            assignment.ProjectId = updated.ProjectId;
+            assignment.EmployeeId = updated.EmployeeId;
+            assignment.EmployeeRoleInProject = updated.EmployeeRoleInProject;
+
+            return assignment;
+        }
+
+        public bool DeleteAssignment(int id)
+        {
+            var assignment = _context.Assignments.FirstOrDefault(a => a.Id == id);
+            if (assignment == null)
+                return false;
+
+            return _context.Assignments.Remove(assignment);
+        }
+
+        public List<ProjectAssignment> GetAssignmentsByProject(int projectId)
+        {
+            return _context.Assignments
+                .Where(a => a.ProjectId == projectId)
+                .ToList();
+        }
+    }
+}

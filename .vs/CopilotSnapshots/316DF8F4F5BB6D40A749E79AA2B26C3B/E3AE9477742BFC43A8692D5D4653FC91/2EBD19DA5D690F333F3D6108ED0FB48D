@@ -1,0 +1,105 @@
+﻿using Clean.CORE.Entities;
+using Clean.DATA.Data;
+using Clean.SERVICE;
+using Microsoft.AspNetCore.Mvc;
+
+namespace WebApplication1.Controllers
+{
+    /// <summary>
+    /// Controller לניהול שיוכים בין עובדים לפרויקטים
+    /// משתמש ב-Dependency Injection לקבלת מקור הנתונים
+    /// </summary>
+    [ApiController]
+    [Route("api/assignments")]
+    public class ProjectAssignmentController : ControllerBase
+    {
+        private readonly ProjectAssignmentService _context;
+
+        /// <summary>
+        /// קונסטרקטור - מקבל את מקור הנתונים דרך Dependency Injection
+        /// </summary>
+        /// <param name="context">מקור הנתונים המוזרק</param>
+        public ProjectAssignmentController(ProjectAssignmentService context)
+        {
+            _context = context;
+        }
+
+        /// <summary>
+        /// שליפת כל השיוכים
+        /// </summary>
+        [HttpGet]
+        public IActionResult GetAllAssignments()
+        {
+            return Ok(_context.);
+        }
+
+        /// <summary>
+        /// שליפת שיוך בודד לפי מזהה
+        /// </summary>
+        [HttpGet("{id}")]
+        public IActionResult GetAssignmentById(int id)
+        {
+            var assignment = _context.Assignments.FirstOrDefault(a => a.Id == id);
+            if (assignment == null)
+                return NotFound("שיוך לא נמצא");
+
+            return Ok(assignment);
+        }
+
+        /// <summary>
+        /// הוספת שיוך חדש בין עובד לפרויקט
+        /// </summary>
+        [HttpPost]
+        public IActionResult AddAssignment(ProjectAssignment assignment)
+        {
+            assignment.Id = _context.Assignments.Max(a => a.Id) + 1;
+            _context.Assignments.Add(assignment);
+            return Ok(assignment);
+        }
+
+        /// <summary>
+        /// עדכון נתוני שיוך קיים
+        /// </summary>
+        [HttpPut("{id}")]
+        public IActionResult UpdateAssignment(int id, ProjectAssignment updated)
+        {
+            var assignment = _context.Assignments.FirstOrDefault(a => a.Id == id);
+            if (assignment == null)
+                return NotFound("שיוך לא נמצא");
+
+            assignment.ProjectId = updated.ProjectId;
+            assignment.EmployeeId = updated.EmployeeId;
+            assignment.EmployeeRoleInProject = updated.EmployeeRoleInProject;
+
+            return Ok(assignment);
+        }
+
+        /// <summary>
+        /// מחיקת שיוך
+        /// </summary>
+        [HttpDelete("{id}")]
+        public IActionResult DeleteAssignment(int id)
+        {
+            var assignment = _context.Assignments.FirstOrDefault(a => a.Id == id);
+            if (assignment == null)
+                return NotFound("שיוך לא נמצא");
+
+            _context.Assignments.Remove(assignment);
+            return Ok("נמחק בהצלחה");
+        }
+
+        /// <summary>
+        /// פעולה נוספת: שליפת כל השיוכים של פרויקט מסוים
+        /// </summary>
+        [HttpGet("by-project/{projectId}")]
+        public IActionResult GetAssignmentsByProject(int projectId)
+        {
+            var list = _context.Assignments
+                .Where(a => a.ProjectId == projectId)
+                .ToList();
+
+            return Ok(list);
+        }
+    }
+}
+

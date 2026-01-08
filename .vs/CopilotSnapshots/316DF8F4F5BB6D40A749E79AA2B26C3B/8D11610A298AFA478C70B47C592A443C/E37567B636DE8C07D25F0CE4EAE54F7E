@@ -1,0 +1,21 @@
+﻿namespace WebApplication1.Model
+{
+    // מחלקה המייצגת שיוך של עובד לפרויקט
+    public class ProjectAssignment
+    {
+        // מזהה ייחודי של השיוך
+        public int Id { get; set; }
+
+        // מזהה פרויקט
+        public int ProjectId { get; set; }
+
+        // מזהה העובד
+        public int EmployeeId { get; set; }
+
+        // תיאור התפקיד של העובד בפרויקט
+         public string EmployeeRoleInProject { get; set; }
+        }
+    }
+
+
+

@@ -1,0 +1,37 @@
+﻿using WebApplication1.Data;
+using WebApplication1.Model;
+using Swashbuckle.AspNetCore.SwaggerGen;
+
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add controllers
+builder.Services.AddControllers();
+
+// Swagger (OpenAPI)
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+// Dependency Injection - רישום DataContext כ-Singleton
+// כל ה-Controllers יקבלו את אותו מופע של DataContext
+builder.Services.AddSingleton<IDataContext, DataContext>();
+
+// אפשרות להחליף ל-FakeContext לצורך בדיקות או פיתוח:
+// builder.Services.AddSingleton<IDataContext, FakeContext>();
+
+var app = builder.Build();
+
+// Swagger UI only in Development
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();

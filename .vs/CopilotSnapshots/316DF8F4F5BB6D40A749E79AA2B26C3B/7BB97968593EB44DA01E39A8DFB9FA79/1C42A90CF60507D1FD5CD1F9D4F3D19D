@@ -1,0 +1,20 @@
+﻿using System.Collections.Generic;
+
+namespace Clean.CORE.Entities
+{
+    public class Project
+    {
+        // מחלקה המייצגת פרויקט במערכת
+        // מזהה ייחודי של הפרויקט
+        public int Id { get; set; }
+
+        // שם הפרויקט
+        public string Name { get; set; }
+
+        // תיאור קצר של הפרויקט
+        public string Description { get; set; }
+
+        // רשימת שיוכים בין עובדים לפרויקט זה
+        public List<ProjectAssignment> Assignments { get; set; } = new();
+    }
+}

@@ -1,0 +1,89 @@
+﻿using Clean.CORE.Entities;
+using Clean.DATA.Data;
+using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Text;
+
+namespace Clean.DATA.Repositories
+{
+    public class ProjectAssignmentRepository
+    {
+            private readonly IDataContext _context;
+
+            public ProjectAssignmentRepository(IDataContext context)
+            {
+                _context = context;
+            }
+
+            public List<ProjectAssignment> GetAllAssignments()
+            {
+                return _context.Assignments;
+            }
+
+            public ProjectAssignment? GetAssignmentById(int id)
+            {
+                var assignment = _context.Assignments.FirstOrDefault(a => a.Id == id);
+                if (assignment == null)
+                    return null;
+
+                return assignment;
+            }
+
+    
+            public IActionResult AddAssignment(ProjectAssignment assignment)
+            {
+                assignment.Id = _context.Assignments.Max(a => a.Id) + 1;
+                _context.Assignments.Add(assignment);
+                return Ok(assignment);
+            }
+
+            /// <summary>
+            /// עדכון נתוני שיוך קיים
+            /// </summary>
+            [HttpPut("{id}")]
+            public IActionResult UpdateAssignment(int id, ProjectAssignment updated)
+            {
+                var assignment = _context.Assignments.FirstOrDefault(a => a.Id == id);
+                if (assignment == null)
+                    return NotFound("שיוך לא נמצא");
+
+                assignment.ProjectId = updated.ProjectId;
+                assignment.EmployeeId = updated.EmployeeId;
+                assignment.EmployeeRoleInProject = updated.EmployeeRoleInProject;
+
+                return Ok(assignment);
+            }
+
+            /// <summary>
+            /// מחיקת שיוך
+            /// </summary>
+            [HttpDelete("{id}")]
+            public IActionResult DeleteAssignment(int id)
+            {
+                var assignment = _context.Assignments.FirstOrDefault(a => a.Id == id);
+                if (assignment == null)
+                    return NotFound("שיוך לא נמצא");
+
+                _context.Assignments.Remove(assignment);
+                return Ok("נמחק בהצלחה");
+            }
+
+            /// <summary>
+            /// פעולה נוספת: שליפת כל השיוכים של פרויקט מסוים
+            /// </summary>
+            [HttpGet("by-project/{projectId}")]
+            public IActionResult GetAssignmentsByProject(int projectId)
+            {
+                var list = _context.Assignments
+                    .Where(a => a.ProjectId == projectId)
+                    .ToList();
+
+                return Ok(list);
+            }
+        }
+    }
+
+
+}
+}

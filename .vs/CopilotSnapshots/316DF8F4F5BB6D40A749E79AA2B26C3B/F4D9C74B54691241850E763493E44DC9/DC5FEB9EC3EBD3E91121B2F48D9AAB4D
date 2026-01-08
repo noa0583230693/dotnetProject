@@ -1,0 +1,19 @@
+﻿using Clean.CORE.Entities;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+
+namespace Clean.DATA.Data
+{ 
+    public class FakeContext : DataContext
+    {
+        public FakeContext() : base(new DbContextOptionsBuilder<DataContext>().UseInMemoryDatabase("TestDb").Options)
+        {
+            // Ensure database created
+            Database.EnsureDeleted();
+            Database.EnsureCreated();
+        }
+    }
+}
+
+
+

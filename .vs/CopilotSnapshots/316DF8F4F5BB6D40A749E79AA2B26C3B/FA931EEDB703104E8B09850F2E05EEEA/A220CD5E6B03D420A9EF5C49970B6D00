@@ -1,0 +1,26 @@
+﻿using WebApplication1.Model;
+
+namespace Clean.DATA.Data
+{
+    /// <summary>
+    /// ממשק לניהול מקור נתונים
+    /// מאפשר החלפה בין מקורות נתונים שונים (FakeContext, DataContext, וכו')
+    /// </summary>
+    public interface IDataContext
+    {
+        /// <summary>
+        /// רשימת כל הפרויקטים במערכת
+        /// </summary>
+        List<Project> Projects { get; set; }
+
+        /// <summary>
+        /// רשימת כל העובדים במערכת
+        /// </summary>
+        List<Employee> Employees { get; set; }
+
+        /// <summary>
+        /// רשימת כל השיוכים בין עובדים לפרויקטים
+        /// </summary>
+        List<ProjectAssignment> Assignments { get; set; }
+    }
+}

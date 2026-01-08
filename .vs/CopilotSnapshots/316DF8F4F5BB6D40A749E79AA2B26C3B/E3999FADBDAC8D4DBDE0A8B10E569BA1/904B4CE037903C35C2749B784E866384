@@ -1,0 +1,51 @@
+﻿using WebApplication1.Model;
+
+namespace WebApplication1
+{ 
+        public class DataContext
+        {
+            // Singleton instance - מופע יחיד של ה-DataContext
+            private static DataContext? _instance;
+            private static readonly object _lock = new object();
+
+            // Property לגישה למופע היחיד
+            public static DataContext Instance
+            {
+                get
+                {
+                    if (_instance == null)
+                    {
+                        lock (_lock)
+                        {
+                            if (_instance == null)
+                            {
+                                _instance = new DataContext();
+                            }
+                        }
+                    }
+                    return _instance;
+                }
+            }
+
+            // רשימת פרויקטים זמנית
+            public List<Project> Projects { get; set; } = new()
+            {
+                new Project { Id = 1, Name = "מערכת ניהול מלאי", Description = "בניית מערכת למעקב אחרי מלאים" },
+                new Project { Id = 2, Name = "אתר מכירות", Description = "פיתוח אתר למכירת מוצרים" }
+            };
+
+            // רשימת עובדים זמנית
+            public List<Employee> Employees { get; set; } = new()
+            {
+                new Employee { Id = 1, FullName = "דנה לוי", Role = "מפתחת" },
+                new Employee { Id = 2, FullName = "יואב שמש", Role = "בודק תוכנה" }
+            };
+
+            // רשימת שיוכים זמנית
+            public List<ProjectAssignment> Assignments { get; set; } = new()
+            {
+                new ProjectAssignment { Id = 1, ProjectId = 1, EmployeeId = 1, EmployeeRoleInProject = "פיתוח צד שרת" }
+            };
+        }
+    }
+

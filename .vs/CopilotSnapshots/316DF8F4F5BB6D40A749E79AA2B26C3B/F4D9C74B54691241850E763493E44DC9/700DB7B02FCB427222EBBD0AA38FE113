@@ -1,0 +1,18 @@
+﻿using Clean.CORE.Entities;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+
+namespace Clean.DATA.Data
+{ 
+    public class FakeContext : DbContext, IDataContext
+    {
+        public DbSet<Project> Projects { get; set; }
+
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<ProjectAssignment> Assignments { get; set; }
+
+    }
+}
+
+
+

@@ -1,0 +1,33 @@
+using Clean.CORE.Entities;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+
+
+
+namespace Clean.DATA.Data
+
+{
+    /// <summary>
+    /// ממשק לניהול מקור נתונים
+    /// מאפשר החלפה בין מקורות נתונים שונים (FakeContext, DataContext, וכו')
+    /// </summary>
+    public interface IDataContext
+    {
+        /// <summary>
+        /// רשימת כל הפרויקטים במערכת
+        /// </summary>
+        DbSet<Project> Projects { get; set; }
+
+        /// <summary>
+        /// רשימת כל העובדים במערכת
+        /// </summary>
+        DbSet<Employee> Employees { get; set; }
+
+        /// <summary>
+        /// רשימת כל השיוכים בין עובדים לפרויקטים
+        /// </summary>
+        DbSet<ProjectAssignment> Assignments { get; set; }
+        int SaveChanges();
+
+    }
+}

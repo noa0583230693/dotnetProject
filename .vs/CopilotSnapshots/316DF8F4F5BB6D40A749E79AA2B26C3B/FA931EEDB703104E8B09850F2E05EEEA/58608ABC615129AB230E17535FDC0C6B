@@ -1,0 +1,76 @@
+﻿using Clean.Core.Entities;
+using Clean.DATA.Data;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Clean.SERVICE
+{
+    public class ProjectService
+    {
+        using System.Collections.Generic;
+using System.Linq;
+using Clean.Core.Entities;
+using Clean.DATA.Data;
+
+namespace Clean.DATA.Repositories
+    {
+        public class ProjectRepository
+        {
+            private readonly IDataContext _context;
+
+            public ProjectRepository(IDataContext context)
+            {
+                _context = context;
+            }
+
+            public List<Project> GetAllProjects()
+            {
+                return _context.Projects.ToList();
+            }
+
+            public Project? GetProjectById(int id)
+            {
+                return _context.Projects.FirstOrDefault(p => p.Id == id);
+            }
+
+            public Project AddProject(Project project)
+            {
+                var nextId = _context.Projects.Any() ? _context.Projects.Max(p => p.Id) + 1 : 1;
+                project.Id = nextId;
+                _context.Projects.Add(project);
+                return project;
+            }
+
+            public Project? UpdateProject(int id, Project updated)
+            {
+                var project = _context.Projects.FirstOrDefault(p => p.Id == id);
+                if (project == null)
+                    return null;
+
+                project.Name = updated.Name;
+                project.Description = updated.Description;
+
+                return project;
+            }
+
+            public bool DeleteProject(int id)
+            {
+                var project = _context.Projects.FirstOrDefault(p => p.Id == id);
+                if (project == null)
+                    return false;
+
+                return _context.Projects.Remove(project);
+            }
+
+            public List<Project> SearchProject(string keyword)
+            {
+                return _context.Projects
+                    .Where(p => p.Name.Contains(keyword, System.StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+            }
+        }
+    }
+
+}
+}

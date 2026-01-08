@@ -1,0 +1,16 @@
+﻿namespace Clean.Core.Entities
+{
+    public class Employee
+    {
+
+            // מזהה ייחודי של עובד
+            public int Id { get; set; }
+
+            // שם העובד
+            public string FullName { get; set; }
+
+            // תפקיד העובד
+            public string Role { get; set; }
+     }
+}
+

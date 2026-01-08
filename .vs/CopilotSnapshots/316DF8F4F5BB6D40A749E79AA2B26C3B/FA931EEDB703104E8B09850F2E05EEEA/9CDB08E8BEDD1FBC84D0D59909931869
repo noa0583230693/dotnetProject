@@ -1,0 +1,98 @@
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Clean.DATA.Data;
+using Clean.CORE.Entities;
+
+
+namespace WebApplication1.Controllers
+{
+
+
+    [ApiController]
+    [Route("api/employees")]
+    public class EmployeeController : ControllerBase
+    {
+        private readonly IDataContext _context;
+
+        public EmployeeController(IDataContext context)
+        {
+            _context = context;
+        }
+
+            /// <summary>
+            /// שליפת כל העובדים
+            /// </summary>
+            [HttpGet]
+            public IActionResult GetAllEmployees()
+            {
+                return Ok(_context.Employees);
+            }
+
+            /// <summary>
+            /// שליפת עובד לפי מזהה
+            /// </summary>
+            [HttpGet("{id}")]
+            public IActionResult GetEmployeeById(int id)
+            {
+                var employee = _context.Employees.FirstOrDefault(e => e.Id == id);
+                if (employee == null)
+                    return NotFound("עובד לא נמצא");
+
+                return Ok(employee);
+            }
+
+        /// <summary>
+        /// הוספת עובד חדש
+        /// </summary>
+        [HttpPost]
+        public IActionResult AddEmployee(Employee employee)
+        {
+            employee.Id = _context.Employees.Max(e => e.Id) + 1;
+            _context.Employees.Add(employee);
+            return Ok(employee);
+        }
+
+        /// <summary>
+        /// עדכון עובד קיים
+        /// </summary>
+        [HttpPut("{id}")]
+        public IActionResult UpdateEmployee(int id, Employee updated)
+        {
+            var employee = _context.Employees.FirstOrDefault(e => e.Id == id);
+            if (employee == null)
+                return NotFound("עובד לא נמצא");
+
+            employee.FullName = updated.FullName;
+            employee.Role = updated.Role;
+
+            return Ok(employee);
+        }
+        /// <summary>
+        /// מחיקת עובד לפי מזהה
+        /// </summary>
+        [HttpDelete("{id}")]
+        public IActionResult DeleteEmployee(int id)
+        {
+            var employee = _context.Employees.FirstOrDefault(e => e.Id == id);
+            if (employee == null)
+                return NotFound("עובד לא נמצא");
+
+            _context.Employees.Remove(employee);
+            return Ok($"העובד עם מזהה {id} נמחק בהצלחה");
+        }
+
+        /// <summary>
+        /// פעולה נוספת: שליפת רשימת העובדים לפי תפקיד
+        /// </summary>
+        [HttpGet("by-role/{role}")]
+        public IActionResult GetByRole(string role)
+        {
+            var list = _context.Employees
+                .Where(e => e.Role.Equals(role, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            return Ok(list);
+        }
+        }
+    }
+

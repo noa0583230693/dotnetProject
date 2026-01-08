@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Clean.CORE/Clean.CORE.csproj" Id="248178c4-af71-4dae-8918-97f8e732009a" />
+  <Project Path="Clean.DATA/Clean.DATA.csproj" Id="809cc691-9ddc-4c89-9a16-0d2310de64ae" />
+  <Project Path="Clean.SERVICE/Clean.SERVICE.csproj" Id="2f4f0dcd-150c-4440-9563-f3884daccf4c" />
+  <Project Path="WebApplication1/Clean.API.csproj" />
+</Solution>

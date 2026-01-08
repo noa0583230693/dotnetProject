@@ -1,0 +1,25 @@
+﻿using Clean.CORE.Entities;
+using Microsoft.EntityFrameworkCore;
+
+namespace Clean.DATA.Data
+{
+    public class DataContext : IDataContext
+    {
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        {
+        }
+
+        // DbSet properties are declared in the base IDataContext, no need to redeclare here
+
+        // Optional: seed data or model configuration can be added here
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Example seed data was previously used in project; keep seeds in migrations instead
+        }
+    }
+}
+
+
+

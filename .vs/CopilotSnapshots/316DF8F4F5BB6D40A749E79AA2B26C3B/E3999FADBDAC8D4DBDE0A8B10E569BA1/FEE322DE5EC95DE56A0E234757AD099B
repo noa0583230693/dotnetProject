@@ -1,0 +1,70 @@
+﻿using Clean.Core.Entities;
+using Clean.DATA.Data;
+using Clean.DATA.Repositories;
+using System.Collections.Generic;
+
+namespace Clean.SERVICE
+{
+    public class EmployeeService//מגדירה את הלוגיקה העיסקית
+    {
+        private readonly EmployeeRepository _repository;
+
+        public EmployeeService(EmployeeRepository repository)
+        {
+            _repository = repository;
+        }
+
+
+        public List<Employee> GetAll() => _repository.GetAllEmployees();
+
+
+            public List<Employee> GetAllEmployees()
+            {
+                return _context.Employees.ToList();
+            }
+
+            public Employee? GetEmployeeById(int id)
+            {
+                return _context.Employees.FirstOrDefault(e => e.Id == id);
+            }
+
+            public Employee AddEmployee(Employee employee)
+            {
+                var nextId = _context.Employees.Any() ? _context.Employees.Max(e => e.Id) + 1 : 1;
+                employee.Id = nextId;
+                _context.Employees.Add(employee);
+                return employee;
+            }
+
+            public Employee? UpdateEmployee(int id, Employee updated)
+            {
+                var employee = _context.Employees.FirstOrDefault(e => e.Id == id);
+                if (employee == null)
+                    return null;
+
+                employee.FullName = updated.FullName;
+                employee.Role = updated.Role;
+
+                return employee;
+            }
+
+            public bool DeleteEmployee(int id)
+            {
+                var employee = _context.Employees.FirstOrDefault(e => e.Id == id);
+                if (employee == null)
+                    return false;
+
+                return _context.Employees.Remove(employee);
+            }
+
+            public List<Employee> GetByRole(string role)
+            {
+                return _context.Employees
+                    .Where(e => e.Role.Equals(role, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+            }
+        }
+    }
+
+}
+}

@@ -1,0 +1,506 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{2F4F0DCD-150C-4440-9563-F3884DACCF4C}|Clean.SERVICE\\Clean.SERVICE.csproj|c:\\users\\keshe\\desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\webapplication1\\clean.service\\employeeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2F4F0DCD-150C-4440-9563-F3884DACCF4C}|Clean.SERVICE\\Clean.SERVICE.csproj|solutionrelative:clean.service\\employeeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{809CC691-9DDC-4C89-9A16-0D2310DE64AE}|Clean.DATA\\Clean.DATA.csproj|c:\\users\\keshe\\desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\webapplication1\\clean.data\\repositories\\employeerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{809CC691-9DDC-4C89-9A16-0D2310DE64AE}|Clean.DATA\\Clean.DATA.csproj|solutionrelative:clean.data\\repositories\\employeerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{809CC691-9DDC-4C89-9A16-0D2310DE64AE}|Clean.DATA\\Clean.DATA.csproj|c:\\users\\keshe\\desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\webapplication1\\clean.data\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{809CC691-9DDC-4C89-9A16-0D2310DE64AE}|Clean.DATA\\Clean.DATA.csproj|solutionrelative:clean.data\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{809CC691-9DDC-4C89-9A16-0D2310DE64AE}|Clean.DATA\\Clean.DATA.csproj|c:\\users\\keshe\\desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\webapplication1\\clean.data\\data\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{809CC691-9DDC-4C89-9A16-0D2310DE64AE}|Clean.DATA\\Clean.DATA.csproj|solutionrelative:clean.data\\data\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{248178C4-AF71-4DAE-8918-97F8E732009A}|Clean.CORE\\Clean.CORE.csproj|c:\\users\\keshe\\desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\webapplication1\\clean.core\\repositories\\irepositorymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{248178C4-AF71-4DAE-8918-97F8E732009A}|Clean.CORE\\Clean.CORE.csproj|solutionrelative:clean.core\\repositories\\irepositorymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/my_db/True/SqlTable/dbo.Employees.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB87D61D-9223-B0BB-6059-505A533C77C3}|WebApplication1\\Clean.API.csproj|c:\\users\\keshe\\desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\webapplication1\\webapplication1\\controllers\\employeecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB87D61D-9223-B0BB-6059-505A533C77C3}|WebApplication1\\Clean.API.csproj|solutionrelative:webapplication1\\controllers\\employeecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{248178C4-AF71-4DAE-8918-97F8E732009A}|Clean.CORE\\Clean.CORE.csproj|c:\\users\\keshe\\desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\webapplication1\\clean.core\\entities\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{248178C4-AF71-4DAE-8918-97F8E732009A}|Clean.CORE\\Clean.CORE.csproj|solutionrelative:clean.core\\entities\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{809CC691-9DDC-4C89-9A16-0D2310DE64AE}|Clean.DATA\\Clean.DATA.csproj|c:\\users\\keshe\\desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\webapplication1\\clean.data\\repositories\\repositorymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{809CC691-9DDC-4C89-9A16-0D2310DE64AE}|Clean.DATA\\Clean.DATA.csproj|solutionrelative:clean.data\\repositories\\repositorymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/my_db/True/SqlTable/dbo.Projects.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{809CC691-9DDC-4C89-9A16-0D2310DE64AE}|Clean.DATA\\Clean.DATA.csproj|c:\\users\\keshe\\desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\webapplication1\\clean.data\\repositories\\projectassignmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{809CC691-9DDC-4C89-9A16-0D2310DE64AE}|Clean.DATA\\Clean.DATA.csproj|solutionrelative:clean.data\\repositories\\projectassignmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{809CC691-9DDC-4C89-9A16-0D2310DE64AE}|Clean.DATA\\Clean.DATA.csproj|c:\\users\\keshe\\desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\webapplication1\\clean.data\\repositories\\projectrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{809CC691-9DDC-4C89-9A16-0D2310DE64AE}|Clean.DATA\\Clean.DATA.csproj|solutionrelative:clean.data\\repositories\\projectrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{248178C4-AF71-4DAE-8918-97F8E732009A}|Clean.CORE\\Clean.CORE.csproj|c:\\users\\keshe\\desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\webapplication1\\clean.core\\repositories\\iemployeerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{248178C4-AF71-4DAE-8918-97F8E732009A}|Clean.CORE\\Clean.CORE.csproj|solutionrelative:clean.core\\repositories\\iemployeerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{248178C4-AF71-4DAE-8918-97F8E732009A}|Clean.CORE\\Clean.CORE.csproj|c:\\users\\keshe\\desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\webapplication1\\clean.core\\repositories\\iprojectassignmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{248178C4-AF71-4DAE-8918-97F8E732009A}|Clean.CORE\\Clean.CORE.csproj|solutionrelative:clean.core\\repositories\\iprojectassignmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{248178C4-AF71-4DAE-8918-97F8E732009A}|Clean.CORE\\Clean.CORE.csproj|c:\\users\\keshe\\desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\webapplication1\\clean.core\\repositories\\iprojectrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{248178C4-AF71-4DAE-8918-97F8E732009A}|Clean.CORE\\Clean.CORE.csproj|solutionrelative:clean.core\\repositories\\iprojectrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{248178C4-AF71-4DAE-8918-97F8E732009A}|Clean.CORE\\Clean.CORE.csproj|c:\\users\\keshe\\desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\webapplication1\\clean.core\\repositories\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{248178C4-AF71-4DAE-8918-97F8E732009A}|Clean.CORE\\Clean.CORE.csproj|solutionrelative:clean.core\\repositories\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2F4F0DCD-150C-4440-9563-F3884DACCF4C}|Clean.SERVICE\\Clean.SERVICE.csproj|c:\\users\\keshe\\desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\webapplication1\\clean.service\\projectservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2F4F0DCD-150C-4440-9563-F3884DACCF4C}|Clean.SERVICE\\Clean.SERVICE.csproj|solutionrelative:clean.service\\projectservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{248178C4-AF71-4DAE-8918-97F8E732009A}|Clean.CORE\\Clean.CORE.csproj|c:\\users\\keshe\\desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\webapplication1\\clean.core\\services\\iprojectservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{248178C4-AF71-4DAE-8918-97F8E732009A}|Clean.CORE\\Clean.CORE.csproj|solutionrelative:clean.core\\services\\iprojectservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{248178C4-AF71-4DAE-8918-97F8E732009A}|Clean.CORE\\Clean.CORE.csproj|c:\\users\\keshe\\desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\webapplication1\\clean.core\\services\\iprojectassignmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{248178C4-AF71-4DAE-8918-97F8E732009A}|Clean.CORE\\Clean.CORE.csproj|solutionrelative:clean.core\\services\\iprojectassignmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2F4F0DCD-150C-4440-9563-F3884DACCF4C}|Clean.SERVICE\\Clean.SERVICE.csproj|c:\\users\\keshe\\desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\webapplication1\\clean.service\\projectassignmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2F4F0DCD-150C-4440-9563-F3884DACCF4C}|Clean.SERVICE\\Clean.SERVICE.csproj|solutionrelative:clean.service\\projectassignmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{248178C4-AF71-4DAE-8918-97F8E732009A}|Clean.CORE\\Clean.CORE.csproj|c:\\users\\keshe\\desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\webapplication1\\clean.core\\services\\iemployeeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{248178C4-AF71-4DAE-8918-97F8E732009A}|Clean.CORE\\Clean.CORE.csproj|solutionrelative:clean.core\\services\\iemployeeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB87D61D-9223-B0BB-6059-505A533C77C3}|WebApplication1\\Clean.API.csproj|c:\\users\\keshe\\desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\webapplication1\\webapplication1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB87D61D-9223-B0BB-6059-505A533C77C3}|WebApplication1\\Clean.API.csproj|solutionrelative:webapplication1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{248178C4-AF71-4DAE-8918-97F8E732009A}|Clean.CORE\\Clean.CORE.csproj|c:\\users\\keshe\\desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\webapplication1\\clean.core\\entities\\project.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{248178C4-AF71-4DAE-8918-97F8E732009A}|Clean.CORE\\Clean.CORE.csproj|solutionrelative:clean.core\\entities\\project.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{809CC691-9DDC-4C89-9A16-0D2310DE64AE}|Clean.DATA\\Clean.DATA.csproj|c:\\users\\keshe\\desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\webapplication1\\clean.data\\data\\idatacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{809CC691-9DDC-4C89-9A16-0D2310DE64AE}|Clean.DATA\\Clean.DATA.csproj|solutionrelative:clean.data\\data\\idatacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/my_db/True/SqlTable/dbo.Assignments.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB87D61D-9223-B0BB-6059-505A533C77C3}|WebApplication1\\Clean.API.csproj|c:\\users\\keshe\\desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\webapplication1\\webapplication1\\webapplication1.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{DB87D61D-9223-B0BB-6059-505A533C77C3}|WebApplication1\\Clean.API.csproj|solutionrelative:webapplication1\\webapplication1.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB87D61D-9223-B0BB-6059-505A533C77C3}|WebApplication1\\Clean.API.csproj|c:\\users\\keshe\\desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\webapplication1\\webapplication1\\controllers\\projectassignmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB87D61D-9223-B0BB-6059-505A533C77C3}|WebApplication1\\Clean.API.csproj|solutionrelative:webapplication1\\controllers\\projectassignmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB87D61D-9223-B0BB-6059-505A533C77C3}|WebApplication1\\Clean.API.csproj|c:\\users\\keshe\\desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\webapplication1\\webapplication1\\controllers\\projectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DB87D61D-9223-B0BB-6059-505A533C77C3}|WebApplication1\\Clean.API.csproj|solutionrelative:webapplication1\\controllers\\projectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB87D61D-9223-B0BB-6059-505A533C77C3}|WebApplication1\\Clean.API.csproj|c:\\users\\keshe\\desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\webapplication1\\webapplication1\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{DB87D61D-9223-B0BB-6059-505A533C77C3}|WebApplication1\\Clean.API.csproj|solutionrelative:webapplication1\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DB87D61D-9223-B0BB-6059-505A533C77C3}|WebApplication1\\Clean.API.csproj|c:\\users\\keshe\\desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\webapplication1\\webapplication1\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{DB87D61D-9223-B0BB-6059-505A533C77C3}|WebApplication1\\Clean.API.csproj|solutionrelative:webapplication1\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DataContext.cs",
+              "DocumentMoniker": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.DATA\\Data\\DataContext.cs",
+              "RelativeDocumentMoniker": "Clean.DATA\\Data\\DataContext.cs",
+              "ToolTip": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.DATA\\Data\\DataContext.cs",
+              "RelativeToolTip": "Clean.DATA\\Data\\DataContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-28T19:53:50.667Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EmployeeRepository.cs",
+              "DocumentMoniker": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.DATA\\Repositories\\EmployeeRepository.cs",
+              "RelativeDocumentMoniker": "Clean.DATA\\Repositories\\EmployeeRepository.cs",
+              "ToolTip": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.DATA\\Repositories\\EmployeeRepository.cs*",
+              "RelativeToolTip": "Clean.DATA\\Repositories\\EmployeeRepository.cs*",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA8AAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-28T19:59:03.97Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Repository.cs",
+              "DocumentMoniker": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.DATA\\Repositories\\Repository.cs",
+              "RelativeDocumentMoniker": "Clean.DATA\\Repositories\\Repository.cs",
+              "ToolTip": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.DATA\\Repositories\\Repository.cs",
+              "RelativeToolTip": "Clean.DATA\\Repositories\\Repository.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAgwDIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-07T20:48:25.057Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EmployeeService.cs",
+              "DocumentMoniker": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.SERVICE\\EmployeeService.cs",
+              "RelativeDocumentMoniker": "Clean.SERVICE\\EmployeeService.cs",
+              "ToolTip": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.SERVICE\\EmployeeService.cs",
+              "RelativeToolTip": "Clean.SERVICE\\EmployeeService.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAApwCAAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-28T19:55:11.237Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IRepositoryManager.cs",
+              "DocumentMoniker": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.CORE\\Repositories\\IRepositoryManager.cs",
+              "RelativeDocumentMoniker": "Clean.CORE\\Repositories\\IRepositoryManager.cs",
+              "ToolTip": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.CORE\\Repositories\\IRepositoryManager.cs",
+              "RelativeToolTip": "Clean.CORE\\Repositories\\IRepositoryManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-07T19:54:55.22Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "dbo.Employees [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/my_db/True/SqlTable/dbo.Employees.sql",
+              "ToolTip": "dbo.Employees [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2026-01-08T22:36:30.49Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "EmployeeController.cs",
+              "DocumentMoniker": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\WebApplication1\\Controllers\\EmployeeController.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Controllers\\EmployeeController.cs",
+              "ToolTip": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\WebApplication1\\Controllers\\EmployeeController.cs",
+              "RelativeToolTip": "WebApplication1\\Controllers\\EmployeeController.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAtwB8AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T08:09:03.267Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Employee.cs",
+              "DocumentMoniker": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.CORE\\Entities\\Employee.cs",
+              "RelativeDocumentMoniker": "Clean.CORE\\Entities\\Employee.cs",
+              "ToolTip": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.CORE\\Entities\\Employee.cs",
+              "RelativeToolTip": "Clean.CORE\\Entities\\Employee.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-28T19:52:56.7Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "RepositoryManager.cs",
+              "DocumentMoniker": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.DATA\\Repositories\\RepositoryManager.cs",
+              "RelativeDocumentMoniker": "Clean.DATA\\Repositories\\RepositoryManager.cs",
+              "ToolTip": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.DATA\\Repositories\\RepositoryManager.cs",
+              "RelativeToolTip": "Clean.DATA\\Repositories\\RepositoryManager.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAQwCMAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-07T20:03:18.056Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "dbo.Projects [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/my_db/True/SqlTable/dbo.Projects.sql",
+              "ToolTip": "dbo.Projects [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2026-01-08T22:36:36.16Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ProjectRepository.cs",
+              "DocumentMoniker": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.DATA\\Repositories\\ProjectRepository.cs",
+              "RelativeDocumentMoniker": "Clean.DATA\\Repositories\\ProjectRepository.cs",
+              "ToolTip": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.DATA\\Repositories\\ProjectRepository.cs",
+              "RelativeToolTip": "Clean.DATA\\Repositories\\ProjectRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-28T19:58:35.137Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ProjectAssignmentRepository.cs",
+              "DocumentMoniker": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.DATA\\Repositories\\ProjectAssignmentRepository.cs",
+              "RelativeDocumentMoniker": "Clean.DATA\\Repositories\\ProjectAssignmentRepository.cs",
+              "ToolTip": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.DATA\\Repositories\\ProjectAssignmentRepository.cs",
+              "RelativeToolTip": "Clean.DATA\\Repositories\\ProjectAssignmentRepository.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-28T19:59:21.984Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "IemployeeRepository.cs",
+              "DocumentMoniker": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.CORE\\Repositories\\IemployeeRepository.cs",
+              "RelativeDocumentMoniker": "Clean.CORE\\Repositories\\IemployeeRepository.cs",
+              "ToolTip": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.CORE\\Repositories\\IemployeeRepository.cs",
+              "RelativeToolTip": "Clean.CORE\\Repositories\\IemployeeRepository.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAuwAwAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-28T21:24:55.426Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "IProjectAssignmentRepository.cs",
+              "DocumentMoniker": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.CORE\\Repositories\\IProjectAssignmentRepository.cs",
+              "RelativeDocumentMoniker": "Clean.CORE\\Repositories\\IProjectAssignmentRepository.cs",
+              "ToolTip": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.CORE\\Repositories\\IProjectAssignmentRepository.cs",
+              "RelativeToolTip": "Clean.CORE\\Repositories\\IProjectAssignmentRepository.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-28T21:29:39.753Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "IProjectRepository.cs",
+              "DocumentMoniker": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.CORE\\Repositories\\IProjectRepository.cs",
+              "RelativeDocumentMoniker": "Clean.CORE\\Repositories\\IProjectRepository.cs",
+              "ToolTip": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.CORE\\Repositories\\IProjectRepository.cs",
+              "RelativeToolTip": "Clean.CORE\\Repositories\\IProjectRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-28T21:28:14.099Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Irepository.cs",
+              "DocumentMoniker": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.CORE\\Repositories\\Irepository.cs",
+              "RelativeDocumentMoniker": "Clean.CORE\\Repositories\\Irepository.cs",
+              "ToolTip": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.CORE\\Repositories\\Irepository.cs",
+              "RelativeToolTip": "Clean.CORE\\Repositories\\Irepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-07T20:34:23.174Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ProjectService.cs",
+              "DocumentMoniker": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.SERVICE\\ProjectService.cs",
+              "RelativeDocumentMoniker": "Clean.SERVICE\\ProjectService.cs",
+              "ToolTip": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.SERVICE\\ProjectService.cs",
+              "RelativeToolTip": "Clean.SERVICE\\ProjectService.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAqwEEAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-28T19:56:27.692Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "IProjectService.cs",
+              "DocumentMoniker": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.CORE\\Services\\IProjectService.cs",
+              "RelativeDocumentMoniker": "Clean.CORE\\Services\\IProjectService.cs",
+              "ToolTip": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.CORE\\Services\\IProjectService.cs",
+              "RelativeToolTip": "Clean.CORE\\Services\\IProjectService.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAwBYAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-28T21:58:21.714Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "IProjectAssignmentService.cs",
+              "DocumentMoniker": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.CORE\\Services\\IProjectAssignmentService.cs",
+              "RelativeDocumentMoniker": "Clean.CORE\\Services\\IProjectAssignmentService.cs",
+              "ToolTip": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.CORE\\Services\\IProjectAssignmentService.cs",
+              "RelativeToolTip": "Clean.CORE\\Services\\IProjectAssignmentService.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwBkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-28T21:58:07.602Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ProjectAssignmentService.cs",
+              "DocumentMoniker": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.SERVICE\\ProjectAssignmentService.cs",
+              "RelativeDocumentMoniker": "Clean.SERVICE\\ProjectAssignmentService.cs",
+              "ToolTip": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.SERVICE\\ProjectAssignmentService.cs",
+              "RelativeToolTip": "Clean.SERVICE\\ProjectAssignmentService.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAkAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-28T22:54:04.304Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "IEmployeeService.cs",
+              "DocumentMoniker": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.CORE\\Services\\IEmployeeService.cs",
+              "RelativeDocumentMoniker": "Clean.CORE\\Services\\IEmployeeService.cs",
+              "ToolTip": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.CORE\\Services\\IEmployeeService.cs",
+              "RelativeToolTip": "Clean.CORE\\Services\\IEmployeeService.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAuwBIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-28T21:57:49.007Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\WebApplication1\\Program.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Program.cs",
+              "ToolTip": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\WebApplication1\\Program.cs",
+              "RelativeToolTip": "WebApplication1\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T07:47:07.213Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "IDataContext.cs",
+              "DocumentMoniker": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.DATA\\Data\\IDataContext.cs",
+              "RelativeDocumentMoniker": "Clean.DATA\\Data\\IDataContext.cs",
+              "ToolTip": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.DATA\\Data\\IDataContext.cs",
+              "RelativeToolTip": "Clean.DATA\\Data\\IDataContext.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-28T20:11:42.663Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Project.cs",
+              "DocumentMoniker": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.CORE\\Entities\\Project.cs",
+              "RelativeDocumentMoniker": "Clean.CORE\\Entities\\Project.cs",
+              "ToolTip": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\Clean.CORE\\Entities\\Project.cs",
+              "RelativeToolTip": "Clean.CORE\\Entities\\Project.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAhwBIAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-28T20:48:31.814Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "dbo.Assignments.sql",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/my_db/True/SqlTable/dbo.Assignments.sql",
+              "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/my_db/True/SqlTable/dbo.Assignments.sql",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-12-28T23:50:22.971Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "ProjectAssignmentController.cs",
+              "DocumentMoniker": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\WebApplication1\\Controllers\\ProjectAssignmentController.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Controllers\\ProjectAssignmentController.cs",
+              "ToolTip": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\WebApplication1\\Controllers\\ProjectAssignmentController.cs",
+              "RelativeToolTip": "WebApplication1\\Controllers\\ProjectAssignmentController.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAswEAAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T08:11:38.651Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "WebApplication1.http",
+              "DocumentMoniker": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\WebApplication1\\WebApplication1.http",
+              "RelativeDocumentMoniker": "WebApplication1\\WebApplication1.http",
+              "ToolTip": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\WebApplication1\\WebApplication1.http",
+              "RelativeToolTip": "WebApplication1\\WebApplication1.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-12-02T20:34:10.005Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "ProjectController.cs",
+              "DocumentMoniker": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\WebApplication1\\Controllers\\ProjectController.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Controllers\\ProjectController.cs",
+              "ToolTip": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\WebApplication1\\Controllers\\ProjectController.cs",
+              "RelativeToolTip": "WebApplication1\\Controllers\\ProjectController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T08:02:47.752Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\WebApplication1\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "WebApplication1\\appsettings.Development.json",
+              "ToolTip": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\WebApplication1\\appsettings.Development.json",
+              "RelativeToolTip": "WebApplication1\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-04T21:14:09.207Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\WebApplication1\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "WebApplication1\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\keshe\\Desktop\\\u05D3\u05D5\u05D8\u05E0\u05D8\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\\WebApplication1\\WebApplication1\\Properties\\launchSettings.json",
+              "RelativeToolTip": "WebApplication1\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-06T21:29:41.283Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

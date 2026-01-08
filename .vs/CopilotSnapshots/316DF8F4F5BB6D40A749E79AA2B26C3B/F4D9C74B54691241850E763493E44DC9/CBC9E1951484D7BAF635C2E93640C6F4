@@ -1,0 +1,15 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Clean.CORE.Entities;
+
+namespace Clean.DATA.Data
+{
+    // Base DbContext type used across the solution (keeps the name IDataContext for compatibility with existing code)
+    public abstract class IDataContext : DbContext
+    {
+        protected IDataContext(DbContextOptions options) : base(options) { }
+
+        public virtual DbSet<Project> Projects { get; set; } = null!;
+        public virtual DbSet<Employee> Employees { get; set; } = null!;
+        public virtual DbSet<ProjectAssignment> Assignments { get; set; } = null!;
+    }
+}

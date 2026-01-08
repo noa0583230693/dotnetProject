@@ -1,0 +1,86 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Clean.CORE.Entities;
+using Clean.SERVICE;
+using Clean.CORE.Services;
+
+namespace WebApplication1.Controllers
+{
+    [ApiController]
+    [Route("api/projects")]
+    public class ProjectController : ControllerBase
+    {
+        private readonly IProjectService _service;
+
+        public ProjectController(IProjectService service)
+        {
+            _service = service;
+        }
+
+        /// <summary>
+        /// שליפת רשימת כל הפרויקטים
+        /// </summary>
+        [HttpGet]
+        public IActionResult GetAllProjects()
+        {
+            return Ok(_service.GetAll());
+        }
+
+        /// <summary>
+        /// שליפת פרויקט בודד לפי מזהה
+        /// </summary>
+        [HttpGet("{id}")]
+        public IActionResult GetProjectById(int id)
+        {
+            var project = _service.GetById(id);
+            if (project == null)
+                return NotFound("פרויקט לא נמצא");
+
+            return Ok(project);
+        }
+
+        /// <summary>
+        /// הוספת פרויקט חדש
+        /// </summary>
+        [HttpPost]
+        public IActionResult AddProject(Project project)
+        {
+            var added = _service.Add(project);
+            return Ok(added);
+        }
+
+        /// <summary>
+        /// עדכון פרויקט קיים
+        /// </summary>
+        [HttpPut("{id}")]
+        public IActionResult UpdateProject(int id, Project updated)
+        {
+            var project = _service.Update(id, updated);
+            if (project == null)
+                return NotFound("פרויקט לא נמצא");
+
+            return Ok(project);
+        }
+        /// <summary>
+        /// מחיקת פרוקט לפי מזהה
+        /// </summary>
+        [HttpDelete("{id}")]
+        public IActionResult DeleteProject(int id)
+        {
+            var deleted = _service.Delete(id);
+            if (!deleted)
+                return NotFound("פרויקט לא נמצא");
+
+            return Ok($"הפרויקט עם מזהה {id} נמחק בהצלחה");
+        }
+
+        /// <summary>
+        /// פעולה נוספת: חיפוש פרויקטים לפי מילה בשם
+        /// </summary>
+        [HttpGet("search/{keyword}")]
+        public IActionResult SearchProject(string keyword)
+        {
+            var results = _service.Search(keyword);
+            return Ok(results);
+        }
+    }
+}

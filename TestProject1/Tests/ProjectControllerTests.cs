@@ -1,0 +1,448 @@
+using Clean.CORE.Entities;
+using Clean.DATA.Data;
+using Clean.DATA.Repositories;
+using Clean.SERVICE;
+using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Controllers;
+using Xunit;
+using System.Collections.Generic;
+
+namespace WebApplication1.Tests
+{
+    /// <summary>
+    /// מחלקת בדיקות עבור ProjectController
+    /// מכילה בדיקות מקיפות לכל פונקציות ניהול הפרויקטים
+    /// </summary>
+    public class ProjectControllerTests : IDisposable
+    {
+        private readonly ProjectController _controller;
+        private readonly IDataContext _context;
+
+        /// <summary>
+        /// קונסטרקטור - מאתחל את הבדיקות
+        /// רץ לפני כל בדיקה
+        /// </summary>
+        public ProjectControllerTests()
+        {
+            // יצירת FakeContext עבור הבדיקות
+            _context = new FakeContext();
+            
+            // איפוס הנתונים למצב התחלתי
+            ResetFakeContext();
+            
+            var repo = new ProjectRepository(_context);
+            var service = new ProjectService(repo);
+            // יצירת ה-Controller עם הזרקת התלות
+            _controller = new ProjectController(service);
+        }
+
+        /// <summary>
+        /// איפוס ה-FakeContext למצב התחלתי
+        /// </summary>
+        private void ResetFakeContext()
+        {
+            _context.Projects.Clear();
+            _context.Projects.Add(new Project { Id = 1, Name = "מערכת ניהול מלאי", Description = "בניית מערכת למעקב אחרי מלאים" });
+            _context.Projects.Add(new Project { Id = 2, Name = "אתר מכירות", Description = "פיתוח אתר למכירת מוצרים" });
+            
+            // איפוס גם Employees ו-Assignments למניעת השפעה בין בדיקות
+            _context.Employees.Clear();
+            _context.Employees.Add(new Employee { Id = 1, FullName = "דנה לוי", Role = "מפתחת" });
+            _context.Employees.Add(new Employee { Id = 2, FullName = "יואב שמש", Role = "בודק תוכנה" });
+            
+            _context.Assignments.Clear();
+            _context.Assignments.Add(new IProjectAssignment { Id = 1, ProjectId = 1, EmployeeId = 1, EmployeeRoleInProject = "פיתוח צד שרת" });
+        }
+
+        public void Dispose()
+        {
+            // ניקוי במידת הצורך
+        }
+
+        #region GetAllProjects Tests
+
+        /// <summary>
+        /// בדיקה: שליפת כל הפרויקטים מחזירה תוצאה תקינה
+        /// מטרה: לוודא שהפונקציה מחזירה OkResult עם רשימת פרויקטים
+        /// </summary>
+        [Fact]
+        public void GetAllProjects_ReturnsOkResult_WithListOfProjects()
+        {
+            // Act
+            var result = _controller.GetAllProjects();
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var projects = Assert.IsAssignableFrom<List<Project>>(okResult.Value);
+            Assert.Equal(2, projects.Count);
+        }
+
+        /// <summary>
+        /// בדיקה: הפרויקטים המוחזרים מכילים את הנתונים הנכונים
+        /// מטרה: לוודא שהנתונים שלמים ונכונים
+        /// </summary>
+        [Fact]
+        public void GetAllProjects_ReturnsCorrectData()
+        {
+            // Act
+            var result = _controller.GetAllProjects();
+
+            // Assert
+            var okResult = result as OkObjectResult;
+            var projects = okResult?.Value as List<Project>;
+
+            Assert.NotNull(projects);
+            Assert.Contains(projects, p => p.Name == "מערכת ניהול מלאי");
+            Assert.Contains(projects, p => p.Name == "אתר מכירות");
+        }
+
+        #endregion
+
+        #region GetProjectById Tests
+
+        /// <summary>
+        /// בדיקה: שליפת פרויקט קיים לפי ID מחזירה את הפרויקט הנכון
+        /// מטרה: לוודא שהפונקציה מוצאת פרויקט קיים
+        /// </summary>
+        [Fact]
+        public void GetProjectById_WithValidId_ReturnsOkResult_WithProject()
+        {
+            // Arrange
+            int validId = 1;
+
+            // Act
+            var result = _controller.GetProjectById(validId);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var project = Assert.IsType<Project>(okResult.Value);
+            Assert.Equal(validId, project.Id);
+            Assert.Equal("מערכת ניהול מלאי", project.Name);
+        }
+
+        /// <summary>
+        /// בדיקה: שליפת פרויקט עם ID לא קיים מחזירה NotFound
+        /// מטרה: לוודא שהפונקציה מחזירה 404 כשהפרויקט לא קיים
+        /// </summary>
+        [Fact]
+        public void GetProjectById_WithInvalidId_ReturnsNotFound()
+        {
+            // Arrange
+            int invalidId = 999;
+
+            // Act
+            var result = _controller.GetProjectById(invalidId);
+
+            // Assert
+            var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
+            Assert.Equal("פרויקט לא נמצא", notFoundResult.Value);
+        }
+
+        /// <summary>
+        /// בדיקה: שליפת פרויקטים עם IDs שונים
+        /// מטרה: לוודא שהפונקציה עובדת עם ערכים מרובים
+        /// </summary>
+        [Theory]
+        [InlineData(1, "מערכת ניהול מלאי")]
+        [InlineData(2, "אתר מכירות")]
+        public void GetProjectById_WithDifferentIds_ReturnsCorrectProject(int id, string expectedName)
+        {
+            // Act
+            var result = _controller.GetProjectById(id);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var project = Assert.IsType<Project>(okResult.Value);
+            Assert.Equal(expectedName, project.Name);
+        }
+
+        #endregion
+
+        #region AddProject Tests
+
+        /// <summary>
+        /// בדיקה: הוספת פרויקט חדש מצליחה
+        /// מטרה: לוודא שהפונקציה מוסיפה פרויקט לרשימה
+        /// </summary>
+        [Fact]
+        public void AddProject_ValidProject_ReturnsOkResult_WithNewProject()
+        {
+            // Arrange
+            var newProject = new Project
+            {
+                Name = "אפליקציית מובייל",
+                Description = "פיתוח אפליקציה למכשירים ניידים"
+            };
+
+            // Act
+            var result = _controller.AddProject(newProject);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var addedProject = Assert.IsType<Project>(okResult.Value);
+            Assert.Equal(3, addedProject.Id); // ID אוטומטי חדש
+            Assert.Equal("אפליקציית מובייל", addedProject.Name);
+        }
+
+        /// <summary>
+        /// בדיקה: הוספת פרויקט מגדילה את מספר הפרויקטים ברשימה
+        /// מטרה: לוודא שהפרויקט באמת נוסף למערכת
+        /// </summary>
+        [Fact]
+        public void AddProject_IncreasesProjectCount()
+        {
+            // Arrange
+            int initialCount = _context.Projects.Count;
+            var newProject = new Project { Name = "פרויקט בדיקה", Description = "תיאור בדיקה" };
+
+            // Act
+            _controller.AddProject(newProject);
+
+            // Assert
+            Assert.Equal(initialCount + 1, _context.Projects.Count);
+        }
+
+        /// <summary>
+        /// בדיקה: ID אוטומטי מוקצה נכון
+        /// מטרה: לוודא שה-ID החדש הוא המקסימום + 1
+        /// </summary>
+        [Fact]
+        public void AddProject_AssignsCorrectId()
+        {
+            // Arrange
+            var newProject = new Project { Name = "פרויקט חדש", Description = "תיאור חדש" };
+
+            // Act
+            var result = _controller.AddProject(newProject);
+
+            // Assert
+            var okResult = result as OkObjectResult;
+            var addedProject = okResult?.Value as Project;
+            Assert.NotNull(addedProject);
+            Assert.Equal(3, addedProject.Id);
+        }
+
+        #endregion
+
+        #region UpdateProject Tests
+
+        /// <summary>
+        /// בדיקה: עדכון פרויקט קיים מצליח
+        /// מטרה: לוודא שהפונקציה מעדכנת את פרטי הפרויקט
+        /// </summary>
+        [Fact]
+        public void UpdateProject_WithValidId_ReturnsOkResult_WithUpdatedProject()
+        {
+            // Arrange
+            int projectId = 1;
+            var updatedData = new Project
+            {
+                Name = "מערכת ניהול מלאי - מעודכן",
+                Description = "תיאור מעודכן"
+            };
+
+            // Act
+            var result = _controller.UpdateProject(projectId, updatedData);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var project = Assert.IsType<Project>(okResult.Value);
+            Assert.Equal("מערכת ניהול מלאי - מעודכן", project.Name);
+            Assert.Equal("תיאור מעודכן", project.Description);
+        }
+
+        /// <summary>
+        /// בדיקה: עדכון פרויקט לא קיים מחזיר NotFound
+        /// מטרה: לוודא שהפונקציה מחזירה שגיאה כשהפרויקט לא קיים
+        /// </summary>
+        [Fact]
+        public void UpdateProject_WithInvalidId_ReturnsNotFound()
+        {
+            // Arrange
+            int invalidId = 999;
+            var updatedData = new Project { Name = "Test", Description = "Test" };
+
+            // Act
+            var result = _controller.UpdateProject(invalidId, updatedData);
+
+            // Assert
+            Assert.IsType<NotFoundObjectResult>(result);
+        }
+
+        /// <summary>
+        /// בדיקה: עדכון פרויקט משמר את מספר הפרויקטים
+        /// מטרה: לוודא שעדכון לא מוסיף פרויקט חדש
+        /// </summary>
+        [Fact]
+        public void UpdateProject_DoesNotChangeProjectCount()
+        {
+            // Arrange
+            int initialCount = _context.Projects.Count;
+            var updatedData = new Project { Name = "Updated", Description = "Updated" };
+
+            // Act
+            _controller.UpdateProject(1, updatedData);
+
+            // Assert
+            Assert.Equal(initialCount, _context.Projects.Count);
+        }
+
+        #endregion
+
+        #region DeleteProject Tests
+
+        /// <summary>
+        /// בדיקה: מחיקת פרויקט קיים מצליחה
+        /// מטרה: לוודא שהפונקציה מוחקת את הפרויקט
+        /// </summary>
+        [Fact]
+        public void DeleteProject_WithValidId_ReturnsOkResult()
+        {
+            // Arrange
+            int projectId = 1;
+
+            // Act
+            var result = _controller.DeleteProject(projectId);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            Assert.Contains("נמחק בהצלחה", okResult.Value?.ToString());
+        }
+
+        /// <summary>
+        /// בדיקה: מחיקת פרויקט מקטינה את מספר הפרויקטים
+        /// מטרה: לוודא שהפרויקט באמת נמחק מהמערכת
+        /// </summary>
+        [Fact]
+        public void DeleteProject_ReducesProjectCount()
+        {
+            // Arrange
+            int initialCount = _context.Projects.Count;
+
+            // Act
+            _controller.DeleteProject(1);
+
+            // Assert
+            Assert.Equal(initialCount - 1, _context.Projects.Count);
+        }
+
+        /// <summary>
+        /// בדיקה: מחיקת פרויקט לא קיים מחזירה NotFound
+        /// מטרה: לוודא שהפונקציה מטפלת נכון בפרויקט שלא קיים
+        /// </summary>
+        [Fact]
+        public void DeleteProject_WithInvalidId_ReturnsNotFound()
+        {
+            // Arrange
+            int invalidId = 999;
+
+            // Act
+            var result = _controller.DeleteProject(invalidId);
+
+            // Assert
+            Assert.IsType<NotFoundObjectResult>(result);
+        }
+
+        /// <summary>
+        /// בדיקה: לאחר מחיקה, לא ניתן למצוא את הפרויקט
+        /// מטרה: לוודא שהפרויקט באמת לא קיים יותר
+        /// </summary>
+        [Fact]
+        public void DeleteProject_ProjectCannotBeFoundAfterDeletion()
+        {
+            // Arrange
+            int projectId = 1;
+
+            // Act
+            _controller.DeleteProject(projectId);
+            var result = _controller.GetProjectById(projectId);
+
+            // Assert
+            Assert.IsType<NotFoundObjectResult>(result);
+        }
+
+        #endregion
+
+        #region SearchProject Tests
+
+        /// <summary>
+        /// בדיקה: חיפוש פרויקטים לפי מילת מפתח מחזיר תוצאות נכונות
+        /// מטרה: לוודא שחיפוש עובד כראוי
+        /// </summary>
+        [Fact]
+        public void SearchProject_WithValidKeyword_ReturnsMatchingProjects()
+        {
+            // Arrange
+            string keyword = "מערכת";
+
+            // Act
+            var result = _controller.SearchProject(keyword);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var projects = Assert.IsAssignableFrom<List<Project>>(okResult.Value);
+            Assert.Single(projects);
+            Assert.Contains("מערכת ניהול מלאי", projects[0].Name);
+        }
+
+        /// <summary>
+        /// בדיקה: חיפוש עם מילת מפתח שלא קיימת מחזיר רשימה ריקה
+        /// מטרה: לוודא שהחיפוש לא זורק שגיאה במקרה של אי-התאמה
+        /// </summary>
+        [Fact]
+        public void SearchProject_WithNonExistingKeyword_ReturnsEmptyList()
+        {
+            // Arrange
+            string keyword = "בינה מלאכותית";
+
+            // Act
+            var result = _controller.SearchProject(keyword);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var projects = Assert.IsAssignableFrom<List<Project>>(okResult.Value);
+            Assert.Empty(projects);
+        }
+
+        /// <summary>
+        /// בדיקה: חיפוש מחזיר מספר תוצאות כשיש התאמה חלקית
+        /// מטרה: לוודא שהחיפוש מוצא כל הפרויקטים המתאימים
+        /// </summary>
+        [Fact]
+        public void SearchProject_WithPartialMatch_ReturnsMultipleResults()
+        {
+            // Arrange
+            _context.Projects.Add(new Project { Id = 3, Name = "מערכת CRM", Description = "מערכת לניהול לקוחות" });
+            string keyword = "מערכת";
+
+            // Act
+            var result = _controller.SearchProject(keyword);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var projects = Assert.IsAssignableFrom<List<Project>>(okResult.Value);
+            Assert.Equal(2, projects.Count);
+        }
+
+        /// <summary>
+        /// בדיקה: חיפוש לא תלוי באותיות גדולות/קטנות
+        /// מטרה: לוודא שהחיפוש Case-Insensitive
+        /// </summary>
+        [Theory]
+        [InlineData("מערכת")]
+        [InlineData("מערכת")]
+        [InlineData("מערכת")]
+        public void SearchProject_IsCaseInsensitive(string keyword)
+        {
+            // Act
+            var result = _controller.SearchProject(keyword);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var projects = Assert.IsAssignableFrom<List<Project>>(okResult.Value);
+            Assert.NotEmpty(projects);
+        }
+
+        #endregion
+    }
+}

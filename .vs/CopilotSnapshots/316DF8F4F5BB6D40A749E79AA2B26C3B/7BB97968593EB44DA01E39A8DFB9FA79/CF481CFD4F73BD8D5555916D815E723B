@@ -1,0 +1,28 @@
+﻿using System.Collections.Generic;
+using Clean.DATA.Repositories;
+using Clean.CORE.Entities;
+
+namespace Clean.SERVICE
+{
+    public class ProjectService
+    {
+        private readonly ProjectRepository _repository;
+
+        public ProjectService(ProjectRepository repository)
+        {
+            _repository = repository;
+        }
+
+        public List<Project> GetAll() => _repository.GetAllProjects();
+
+        public Project? GetById(int id) => _repository.GetProjectById(id);
+
+        public Project Add(Project project) => _repository.AddProject(project);
+
+        public Project? Update(int id, Project updated) => _repository.UpdateProject(id, updated);
+
+        public bool Delete(int id) => _repository.DeleteProject(id);
+
+        public List<Project> Search(string keyword) => _repository.SearchProject(keyword);
+    }
+}

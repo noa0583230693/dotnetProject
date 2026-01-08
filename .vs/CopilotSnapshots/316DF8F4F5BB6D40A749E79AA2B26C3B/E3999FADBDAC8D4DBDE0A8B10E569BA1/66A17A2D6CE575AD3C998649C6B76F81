@@ -1,0 +1,101 @@
+﻿using Clean.CORE.Entities;
+using Clean.DATA.Data;
+using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Text;
+
+namespace Clean.DATA.Repositories
+{
+    public class ProjectRepository
+    {
+ 
+       
+        public class ProjectRepository : ControllerBase
+        {
+            private readonly IDataContext _context;
+
+            public ProjectController(IDataContext context)
+            {
+                _context = context;
+            }
+
+            /// <summary>
+            /// שליפת רשימת כל הפרויקטים
+            /// </summary>
+            [HttpGet]
+            public IActionResult GetAllProjects()
+            {
+                return Ok(_context.Projects);
+            }
+
+            /// <summary>
+            /// שליפת פרויקט בודד לפי מזהה
+            /// </summary>
+            [HttpGet("{id}")]
+            public IActionResult GetProjectById(int id)
+            {
+                var project = _context.Projects.FirstOrDefault(p => p.Id == id);
+                if (project == null)
+                    return NotFound("פרויקט לא נמצא");
+
+                return Ok(project);
+            }
+
+            /// <summary>
+            /// הוספת פרויקט חדש
+            /// </summary>
+            [HttpPost]
+            public IActionResult AddProject(Project project)
+            {
+                project.Id = _context.Projects.Max(p => p.Id) + 1;
+                _context.Projects.Add(project);
+                return Ok(project);
+            }
+
+            /// <summary>
+            /// עדכון פרויקט קיים
+            /// </summary>
+            [HttpPut("{id}")]
+            public IActionResult UpdateProject(int id, Project updated)
+            {
+                var project = _context.Projects.FirstOrDefault(p => p.Id == id);
+                if (project == null)
+                    return NotFound("פרויקט לא נמצא");
+
+                project.Name = updated.Name;
+                project.Description = updated.Description;
+
+                return Ok(project);
+            }
+            /// <summary>
+            /// מחיקת פרוקט לפי מזהה
+            /// </summary>
+            [HttpDelete("{id}")]
+            public IActionResult DeleteProject(int id)
+            {
+                var project = _context.Projects.FirstOrDefault(p => p.Id == id);
+                if (project == null)
+                    return NotFound("פרויקט לא נמצא");
+
+                _context.Projects.Remove(project);
+                return Ok($"הפרויקט עם מזהה {id} נמחק בהצלחה");
+            }
+
+            /// <summary>
+            /// פעולה נוספת: חיפוש פרויקטים לפי מילה בשם
+            /// </summary>
+            [HttpGet("search/{keyword}")]
+            public IActionResult SearchProject(string keyword)
+            {
+                var results = _context.Projects
+                    .Where(p => p.Name.Contains(keyword, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+
+                return Ok(results);
+            }
+        }
+    }
+
+}
+}

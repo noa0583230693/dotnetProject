@@ -1,0 +1,434 @@
+using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Controllers;
+using Clean.DATA.Data;
+using Clean.CORE.Entities;
+using Clean.DATA.Repositories;
+using Clean.SERVICE;
+using Xunit;
+using System.Collections.Generic;
+
+namespace WebApplication1.Tests
+{
+    /// <summary>
+    /// מחלקת בדיקות עבור EmployeeController
+    /// מכילה בדיקות לכל הפונקציות של ה-Controller
+    /// </summary>
+    public class EmployeeControllerTests : IDisposable
+    {
+        private readonly EmployeeController _controller;
+        private readonly IDataContext _context;
+
+        /// <summary>
+        /// קונסטרקטור - מאתחל את הבדיקות
+        /// רץ לפני כל בדיקה
+        /// </summary>
+        public EmployeeControllerTests()
+        {
+            // יצירת FakeContext עבור הבדיקות
+            _context = new FakeContext();
+            
+            // איפוס הנתונים למצב התחלתי
+            ResetFakeContext();
+            
+            var repo = new EmployeeRepository(_context);
+            var service = new EmployeeService(repo);
+            // יצירת ה-Controller עם הזרקת התלות
+            _controller = new EmployeeController(service);
+        }
+
+        /// <summary>
+        /// פונקציה לאיפוס ה-FakeContext למצב התחלתי
+        /// </summary>
+        private void ResetFakeContext()
+        {
+            _context.Employees.RemoveRange(_context.Employees);
+            _context.SaveChanges();
+            _context.Employees.Add(new Employee { Id = 1, FullName = "דנה לוי", Role = "מפתחת" });
+            _context.Employees.Add(new Employee { Id = 2, FullName = "יואב שמש", Role = "בודק תוכנה" });
+            
+            // איפוס גם Projects ו-Assignments למניעת השפעה בין בדיקות
+            _context.Projects.RemoveRange(_context.Projects);
+            _context.SaveChanges();
+            _context.Projects.Add(new Project { Id = 1, Name = "מערכת ניהול מלאי", Description = "בניית מערכת למעקב אחרי מלאים" });
+            _context.Projects.Add(new Project { Id = 2, Name = "אתר מכירות", Description = "פיתוח אתר למכירת מוצרים" });
+            
+            _context.Assignments.RemoveRange(_context.Assignments);
+            _context.SaveChanges();
+            _context.Assignments.Add(new ProjectAssignment { Id = 1, ProjectId = 1, EmployeeId = 1, EmployeeRoleInProject = "פיתוח צד שרת" });
+        }
+
+        /// <summary>
+        /// ניקוי אחרי כל בדיקה
+        /// </summary>
+        public void Dispose()
+        {
+            // ניקוי במידת הצורך
+        }
+
+        #region GetAllEmployees Tests
+
+        /// <summary>
+        /// בדיקה: שליפת כל העובדים מחזירה תוצאה תקינה
+        /// מטרה: לוודא שהפונקציה מחזירה OkResult עם רשימת עובדים
+        /// </summary>
+        [Fact]
+        public void GetAllEmployees_ReturnsOkResult_WithListOfEmployees()
+        {
+            // Act - ביצוע הפעולה
+            var result = _controller.GetAllEmployees();
+
+            // Assert - בדיקת התוצאה
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var employees = Assert.IsAssignableFrom<List<Employee>>(okResult.Value);
+            Assert.Equal(2, employees.Count);
+        }
+
+        /// <summary>
+        /// בדיקה: שליפת כל העובדים מחזירה את הנתונים הנכונים
+        /// מטרה: לוודא שהנתונים המוחזרים נכונים
+        /// </summary>
+        [Fact]
+        public void GetAllEmployees_ReturnsCorrectData()
+        {
+            // Act
+            var result = _controller.GetAllEmployees();
+
+            // Assert
+            var okResult = result as OkObjectResult;
+            var employees = okResult?.Value as List<Employee>;
+            
+            Assert.NotNull(employees);
+            Assert.Contains(employees, e => e.FullName == "דנה לוי");
+            Assert.Contains(employees, e => e.FullName == "יואב שמש");
+        }
+
+        #endregion
+
+        #region GetEmployeeById Tests
+
+        /// <summary>
+        /// בדיקה: שליפת עובד קיים לפי ID מחזירה את העובד הנכון
+        /// מטרה: לוודא שהפונקציה מוצאת עובד קיים
+        /// </summary>
+        [Fact]
+        public void GetEmployeeById_WithValidId_ReturnsOkResult_WithEmployee()
+        {
+            // Arrange - הכנת הנתונים
+            int validId = 1;
+
+            // Act
+            var result = _controller.GetEmployeeById(validId);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var employee = Assert.IsType<Employee>(okResult.Value);
+            Assert.Equal(validId, employee.Id);
+            Assert.Equal("דנה לוי", employee.FullName);
+        }
+
+        /// <summary>
+        /// בדיקה: שליפת עובד עם ID לא קיים מחזירה NotFound
+        /// מטרה: לוודא שהפונקציה מחזירה 404 כשהעובד לא קיים
+        /// </summary>
+        [Fact]
+        public void GetEmployeeById_WithInvalidId_ReturnsNotFound()
+        {
+            // Arrange
+            int invalidId = 999;
+
+            // Act
+            var result = _controller.GetEmployeeById(invalidId);
+
+            // Assert
+            var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
+            Assert.Equal("עובד לא נמצא", notFoundResult.Value);
+        }
+
+        /// <summary>
+        /// בדיקה: שליפת עובדים עם IDs שונים
+        /// מטרה: לוודא שהפונקציה עובדת עם ערכים שונים
+        /// </summary>
+        [Theory]
+        [InlineData(1, "דנה לוי")]
+        [InlineData(2, "יואב שמש")]
+        public void GetEmployeeById_WithDifferentIds_ReturnsCorrectEmployee(int id, string expectedName)
+        {
+            // Act
+            var result = _controller.GetEmployeeById(id);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var employee = Assert.IsType<Employee>(okResult.Value);
+            Assert.Equal(expectedName, employee.FullName);
+        }
+
+        #endregion
+
+        #region AddEmployee Tests
+
+        /// <summary>
+        /// בדיקה: הוספת עובד חדש מצליחה
+        /// מטרה: לוודא שהפונקציה מוסיפה עובד לרשימה
+        /// </summary>
+        [Fact]
+        public void AddEmployee_ValidEmployee_ReturnsOkResult_WithNewEmployee()
+        {
+            // Arrange
+            var newEmployee = new Employee
+            {
+                FullName = "משה כהן",
+                Role = "מנהל פרויקט"
+            };
+
+            // Act
+            var result = _controller.AddEmployee(newEmployee);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var addedEmployee = Assert.IsType<Employee>(okResult.Value);
+            Assert.Equal(3, addedEmployee.Id); // ID אוטומטי חדש
+            Assert.Equal("משה כהן", addedEmployee.FullName);
+        }
+
+        /// <summary>
+        /// בדיקה: הוספת עובד מגדילה את מספר העובדים ברשימה
+        /// מטרה: לוודא שהעובד באמת נוסף למערכת
+        /// </summary>
+        [Fact]
+        public void AddEmployee_IncreasesEmployeeCount()
+        {
+            // Arrange
+            int initialCount = _context.Employees.Count;
+            var newEmployee = new Employee { FullName = "רחל אברהם", Role = "מעצבת" };
+
+            // Act
+            _controller.AddEmployee(newEmployee);
+
+            // Assert
+            Assert.Equal(initialCount + 1, _context.Employees.Count);
+        }
+
+        /// <summary>
+        /// בדיקה: ID אוטומטי מוקצה נכון
+        /// מטרה: לוודא שה-ID החדש הוא המקסימום + 1
+        /// </summary>
+        [Fact]
+        public void AddEmployee_AssignsCorrectId()
+        {
+            // Arrange
+            var newEmployee = new Employee { FullName = "שרה לוי", Role = "אנליסטית" };
+
+            // Act
+            var result = _controller.AddEmployee(newEmployee);
+
+            // Assert
+            var okResult = result as OkObjectResult;
+            var addedEmployee = okResult?.Value as Employee;
+            Assert.NotNull(addedEmployee);
+            Assert.Equal(3, addedEmployee.Id);
+        }
+
+        #endregion
+
+        #region UpdateEmployee Tests
+
+        /// <summary>
+        /// בדיקה: עדכון עובד קיים מצליח
+        /// מטרה: לוודא שהפונקציה מעדכנת את פרטי העובד
+        /// </summary>
+        [Fact]
+        public void UpdateEmployee_WithValidId_ReturnsOkResult_WithUpdatedEmployee()
+        {
+            // Arrange
+            int employeeId = 1;
+            var updatedData = new Employee
+            {
+                FullName = "דנה לוי - מעודכן",
+                Role = "מפתחת בכירה"
+            };
+
+            // Act
+            var result = _controller.UpdateEmployee(employeeId, updatedData);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var employee = Assert.IsType<Employee>(okResult.Value);
+            Assert.Equal("דנה לוי - מעודכן", employee.FullName);
+            Assert.Equal("מפתחת בכירה", employee.Role);
+        }
+
+        /// <summary>
+        /// בדיקה: עדכון עובד לא קיים מחזיר NotFound
+        /// מטרה: לוודא שהפונקציה מחזירה שגיאה כשהעובד לא קיים
+        /// </summary>
+        [Fact]
+        public void UpdateEmployee_WithInvalidId_ReturnsNotFound()
+        {
+            // Arrange
+            int invalidId = 999;
+            var updatedData = new Employee { FullName = "Test", Role = "Test" };
+
+            // Act
+            var result = _controller.UpdateEmployee(invalidId, updatedData);
+
+            // Assert
+            Assert.IsType<NotFoundObjectResult>(result);
+        }
+
+        /// <summary>
+        /// בדיקה: עדכון עובד משמר את מספר העובדים
+        /// מטרה: לוודא שעדכון לא מוסיף עובד חדש
+        /// </summary>
+        [Fact]
+        public void UpdateEmployee_DoesNotChangeEmployeeCount()
+        {
+            // Arrange
+            int initialCount = _context.Employees.Count;
+            var updatedData = new Employee { FullName = "Updated Name", Role = "Updated Role" };
+
+            // Act
+            _controller.UpdateEmployee(1, updatedData);
+
+            // Assert
+            Assert.Equal(initialCount, _context.Employees.Count);
+        }
+
+        #endregion
+
+        #region DeleteEmployee Tests
+
+        /// <summary>
+        /// בדיקה: מחיקת עובד קיים מצליחה
+        /// מטרה: לוודא שהפונקציה מוחקת את העובד
+        /// </summary>
+        [Fact]
+        public void DeleteEmployee_WithValidId_ReturnsOkResult()
+        {
+            // Arrange
+            int employeeId = 1;
+
+            // Act
+            var result = _controller.DeleteEmployee(employeeId);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            Assert.Contains("נמחק בהצלחה", okResult.Value?.ToString());
+        }
+
+        /// <summary>
+        /// בדיקה: מחיקת עובד מקטינה את מספר העובדים
+        /// מטרה: לוודא שהעובד באמת נמחק מהמערכת
+        /// </summary>
+        [Fact]
+        public void DeleteEmployee_ReducesEmployeeCount()
+        {
+            // Arrange
+            int initialCount = _context.Employees.Count;
+
+            // Act
+            _controller.DeleteEmployee(1);
+
+            // Assert
+            Assert.Equal(initialCount - 1, _context.Employees.Count);
+        }
+
+        /// <summary>
+        /// בדיקה: מחיקת עובד לא קיים מחזירה NotFound
+        /// מטרה: לוודא שהפונקציה מטפלת נכון בעובד שלא קיים
+        /// </summary>
+        [Fact]
+        public void DeleteEmployee_WithInvalidId_ReturnsNotFound()
+        {
+            // Arrange
+            int invalidId = 999;
+
+            // Act
+            var result = _controller.DeleteEmployee(invalidId);
+
+            // Assert
+            Assert.IsType<NotFoundObjectResult>(result);
+        }
+
+        /// <summary>
+        /// בדיקה: לאחר מחיקה, לא ניתן למצוא את העובד
+        /// מטרה: לוודא שהעובד באמת לא קיים יותר
+        /// </summary>
+        [Fact]
+        public void DeleteEmployee_EmployeeCannotBeFoundAfterDeletion()
+        {
+            // Arrange
+            int employeeId = 1;
+
+            // Act
+            _controller.DeleteEmployee(employeeId);
+            var result = _controller.GetEmployeeById(employeeId);
+
+            // Assert
+            Assert.IsType<NotFoundObjectResult>(result);
+        }
+
+        #endregion
+
+        #region GetByRole Tests
+
+        /// <summary>
+        /// בדיקה: שליפת עובדים לפי תפקיד מחזירה את העובדים הנכונים
+        /// מטרה: לוודא שהפילטר לפי תפקיד עובד
+        /// </summary>
+        [Fact]
+        public void GetByRole_WithValidRole_ReturnsMatchingEmployees()
+        {
+            // Arrange
+            string role = "מפתחת";
+
+            // Act
+            var result = _controller.GetByRole(role);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var employees = Assert.IsAssignableFrom<List<Employee>>(okResult.Value);
+            Assert.Single(employees);
+            Assert.Equal("דנה לוי", employees[0].FullName);
+        }
+
+        /// <summary>
+        /// בדיקה: חיפוש תפקיד לא קיים מחזיר רשימה רקה
+        /// מטרה: לוודא שהפונקציה לא זורקת שגיאה עם תפקיד לא קיים
+        /// </summary>
+        [Fact]
+        public void GetByRole_WithNonExistingRole_ReturnsEmptyList()
+        {
+            // Arrange
+            string role = "מנכ״ל";
+
+            // Act
+            var result = _controller.GetByRole(role);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var employees = Assert.IsAssignableFrom<List<Employee>>(okResult.Value);
+            Assert.Empty(employees);
+        }
+
+        /// <summary>
+        /// בדיקה: חיפוש תפקיד לא תלוי באותיות גדולות/קטנות
+        /// מטרה: לוודא שהחיפוש Case-Insensitive
+        /// </summary>
+        [Theory]
+        [InlineData("מפתחת")]
+        [InlineData("מפתחת")]
+        [InlineData("מפתחת")]
+        public void GetByRole_IsCaseInsensitive(string role)
+        {
+            // Act
+            var result = _controller.GetByRole(role);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var employees = Assert.IsAssignableFrom<List<Employee>>(okResult.Value);
+            Assert.NotEmpty(employees);
+        }
+
+        #endregion
+    }
+}

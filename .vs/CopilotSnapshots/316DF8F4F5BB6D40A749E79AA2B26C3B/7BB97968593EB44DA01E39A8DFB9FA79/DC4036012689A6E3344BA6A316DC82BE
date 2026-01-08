@@ -1,0 +1,28 @@
+﻿using System.Collections.Generic;
+using Clean.DATA.Repositories;
+using Clean.CORE.Entities;
+
+namespace Clean.SERVICE
+{
+    public class EmployeeService // מגדירה את הלוגיקה העיסקית עבור עובדים
+    {
+        private readonly EmployeeRepository _repository;
+
+        public EmployeeService(EmployeeRepository repository)
+        {
+            _repository = repository;
+        }
+
+        public List<Employee> GetAll() => _repository.GetAllEmployees();
+
+        public Employee? GetById(int id) => _repository.GetEmployeeById(id);
+
+        public Employee Add(Employee employee) => _repository.AddEmployee(employee);
+
+        public Employee? Update(int id, Employee updated) => _repository.UpdateEmployee(id, updated);
+
+        public bool Delete(int id) => _repository.DeleteEmployee(id);
+
+        public List<Employee> GetByRole(string role) => _repository.GetByRole(role);
+    }
+}

@@ -1,0 +1,416 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Controllers;
+using WebApplication1.Data;
+using WebApplication1.Model;
+using Xunit;
+
+namespace WebApplication1.Tests
+{
+    /// <summary>
+    /// מחלקת בדיקות עבור ProjectAssignmentController
+    /// מכילה בדיקות מקיפות לכל פונקציות ניהול שיוכים בין עובדים לפרויקטים
+    /// </summary>
+    public class ProjectAssignmentControllerTests : IDisposable
+    {
+        private readonly ProjectAssignmentController _controller;
+        private readonly FakeContext _context;
+
+        /// <summary>
+        /// קונסטרקטור - מאתחל את הבדיקות
+        /// רץ לפני כל בדיקה
+        /// </summary>
+        public ProjectAssignmentControllerTests()
+        {
+            _context = FakeContext.Instance;
+            _controller = new ProjectAssignmentController();
+        }
+
+        /// <summary>
+        /// איפוס ה-FakeContext למצב התחלתי
+        /// </summary>
+      
+        public void Dispose()
+        {
+            // ניקוי במידת הצורך
+        }
+
+        #region GetAllAssignments Tests
+
+        /// <summary>
+        /// בדיקה: שליפת כל השיוכים מחזירה תוצאה תקינה
+        /// מטרה: לוודא שהפונקציה מחזירה OkResult עם רשימת שיוכים
+        /// </summary>
+        [Fact]
+        public void GetAllAssignments_ReturnsOkResult_WithListOfAssignments()
+        {
+            // Act
+            var result = _controller.GetAllAssignments();
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var assignments = Assert.IsAssignableFrom<List<ProjectAssignment>>(okResult.Value);
+            Assert.Single(assignments);
+        }
+
+        /// <summary>
+        /// בדיקה: השיוכים המוחזרים מכילים את הנתונים הנכונים
+        /// מטרה: לוודא שהנתונים שלמים ונכונים
+        /// </summary>
+        [Fact]
+        public void GetAllAssignments_ReturnsCorrectData()
+        {
+            // Act
+            var result = _controller.GetAllAssignments();
+
+            // Assert
+            var okResult = result as OkObjectResult;
+            var assignments = okResult?.Value as List<ProjectAssignment>;
+
+            Assert.NotNull(assignments);
+            Assert.Contains(assignments, a => a.ProjectId == 1 && a.EmployeeId == 1);
+        }
+
+        #endregion
+
+        #region GetAssignmentById Tests
+
+        /// <summary>
+        /// בדיקה: שליפת שיוך קיים לפי ID מחזירה את השיוך הנכון
+        /// מטרה: לוודא שהפונקציה מוצאת שיוך קיים
+        /// </summary>
+        [Fact]
+        public void GetAssignmentById_WithValidId_ReturnsOkResult_WithAssignment()
+        {
+            // Arrange
+            int validId = 1;
+
+            // Act
+            var result = _controller.GetAssignmentById(validId);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var assignment = Assert.IsType<ProjectAssignment>(okResult.Value);
+            Assert.Equal(validId, assignment.Id);
+            Assert.Equal("פיתוח צד שרת", assignment.EmployeeRoleInProject);
+        }
+
+        /// <summary>
+        /// בדיקה: שליפת שיוך עם ID לא קיים מחזירה NotFound
+        /// מטרה: לוודא שהפונקציה מחזירה 404 כשהשיוך לא קיים
+        /// </summary>
+        [Fact]
+        public void GetAssignmentById_WithInvalidId_ReturnsNotFound()
+        {
+            // Arrange
+            int invalidId = 999;
+
+            // Act
+            var result = _controller.GetAssignmentById(invalidId);
+
+            // Assert
+            var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
+            Assert.Equal("שיוך לא נמצא", notFoundResult.Value);
+        }
+
+        #endregion
+
+        #region AddAssignment Tests
+
+        /// <summary>
+        /// בדיקה: הוספת שיוך חדש מצליחה
+        /// מטרה: לוודא שהפונקציה מוסיפה שיוך לרשימה
+        /// </summary>
+        [Fact]
+        public void AddAssignment_ValidAssignment_ReturnsOkResult_WithNewAssignment()
+        {
+            // Arrange
+            var newAssignment = new ProjectAssignment
+            {
+                ProjectId = 2,
+                EmployeeId = 2,
+                EmployeeRoleInProject = "בדיקות אוטומציה"
+            };
+
+            // Act
+            var result = _controller.AddAssignment(newAssignment);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var addedAssignment = Assert.IsType<ProjectAssignment>(okResult.Value);
+            Assert.Equal(2, addedAssignment.Id); // ID אוטומטי חדש
+            Assert.Equal("בדיקות אוטומציה", addedAssignment.EmployeeRoleInProject);
+        }
+
+        /// <summary>
+        /// בדיקה: הוספת שיוך מגדילה את מספר השיוכים ברשימה
+        /// מטרה: לוודא שהשיוך באמת נוסף למערכת
+        /// </summary>
+        [Fact]
+        public void AddAssignment_IncreasesAssignmentCount()
+        {
+            // Arrange
+            int initialCount = _context.Assignments.Count;
+            var newAssignment = new ProjectAssignment 
+            { 
+                ProjectId = 1, 
+                EmployeeId = 2, 
+                EmployeeRoleInProject = "תיעוד" 
+            };
+
+            // Act
+            _controller.AddAssignment(newAssignment);
+
+            // Assert
+            Assert.Equal(initialCount + 1, _context.Assignments.Count);
+        }
+
+        /// <summary>
+        /// בדיקה: ID אוטומטי מוקצה נכון
+        /// מטרה: לוודא שה-ID החדש הוא המקסימום + 1
+        /// </summary>
+        [Fact]
+        public void AddAssignment_AssignsCorrectId()
+        {
+            // Arrange
+            var newAssignment = new ProjectAssignment 
+            { 
+                ProjectId = 2, 
+                EmployeeId = 1, 
+                EmployeeRoleInProject = "ארכיטקטורה" 
+            };
+
+            // Act
+            var result = _controller.AddAssignment(newAssignment);
+
+            // Assert
+            var okResult = result as OkObjectResult;
+            var addedAssignment = okResult?.Value as ProjectAssignment;
+            Assert.NotNull(addedAssignment);
+            Assert.Equal(2, addedAssignment.Id);
+        }
+
+        #endregion
+
+        #region UpdateAssignment Tests
+
+        /// <summary>
+        /// בדיקה: עדכון שיוך קיים מצליח
+        /// מטרה: לוודא שהפונקציה מעדכנת את פרטי השיוך
+        /// </summary>
+        [Fact]
+        public void UpdateAssignment_WithValidId_ReturnsOkResult_WithUpdatedAssignment()
+        {
+            // Arrange
+            int assignmentId = 1;
+            var updatedData = new ProjectAssignment
+            {
+                ProjectId = 2,
+                EmployeeId = 2,
+                EmployeeRoleInProject = "פיתוח Full Stack"
+            };
+
+            // Act
+            var result = _controller.UpdateAssignment(assignmentId, updatedData);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var assignment = Assert.IsType<ProjectAssignment>(okResult.Value);
+            Assert.Equal(2, assignment.ProjectId);
+            Assert.Equal(2, assignment.EmployeeId);
+            Assert.Equal("פיתוח Full Stack", assignment.EmployeeRoleInProject);
+        }
+
+        /// <summary>
+        /// בדיקה: עדכון שיוך לא קיים מחזיר NotFound
+        /// מטרה: לוודא שהפונקציה מחזירה שגיאה כשהשיוך לא קיים
+        /// </summary>
+        [Fact]
+        public void UpdateAssignment_WithInvalidId_ReturnsNotFound()
+        {
+            // Arrange
+            int invalidId = 999;
+            var updatedData = new ProjectAssignment 
+            { 
+                ProjectId = 1, 
+                EmployeeId = 1, 
+                EmployeeRoleInProject = "Test" 
+            };
+
+            // Act
+            var result = _controller.UpdateAssignment(invalidId, updatedData);
+
+            // Assert
+            Assert.IsType<NotFoundObjectResult>(result);
+        }
+
+        /// <summary>
+        /// בדיקה: עדכון שיוך משמר את מספר השיוכים
+        /// מטרה: לוודא שעדכון לא מוסיף שיוך חדש
+        /// </summary>
+        [Fact]
+        public void UpdateAssignment_DoesNotChangeAssignmentCount()
+        {
+            // Arrange
+            int initialCount = _context.Assignments.Count;
+            var updatedData = new ProjectAssignment 
+            { 
+                ProjectId = 1, 
+                EmployeeId = 1, 
+                EmployeeRoleInProject = "Updated" 
+            };
+
+            // Act
+            _controller.UpdateAssignment(1, updatedData);
+
+            // Assert
+            Assert.Equal(initialCount, _context.Assignments.Count);
+        }
+
+        #endregion
+
+        #region DeleteAssignment Tests
+
+        /// <summary>
+        /// בדיקה: מחיקת שיוך קיים מצליחה
+        /// מטרה: לוודא שהפונקציה מוחקת את השיוך
+        /// </summary>
+        [Fact]
+        public void DeleteAssignment_WithValidId_ReturnsOkResult()
+        {
+            // Arrange
+            int assignmentId = 1;
+
+            // Act
+            var result = _controller.DeleteAssignment(assignmentId);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            Assert.Equal("נמחק בהצלחה", okResult.Value);
+        }
+
+        /// <summary>
+        /// בדיקה: מחיקת שיוך מקטינה את מספר השיוכים
+        /// מטרה: לוודא שהשיוך באמת נמחק מהמערכת
+        /// </summary>
+        [Fact]
+        public void DeleteAssignment_ReducesAssignmentCount()
+        {
+            // Arrange
+            int initialCount = _context.Assignments.Count;
+
+            // Act
+            _controller.DeleteAssignment(1);
+
+            // Assert
+            Assert.Equal(initialCount - 1, _context.Assignments.Count);
+        }
+
+        /// <summary>
+        /// בדיקה: מחיקת שיוך לא קיים מחזירה NotFound
+        /// מטרה: לוודא שהפונקציה מטפלת נכון בשיוך שלא קיים
+        /// </summary>
+        [Fact]
+        public void DeleteAssignment_WithInvalidId_ReturnsNotFound()
+        {
+            // Arrange
+            int invalidId = 999;
+
+            // Act
+            var result = _controller.DeleteAssignment(invalidId);
+
+            // Assert
+            Assert.IsType<NotFoundObjectResult>(result);
+        }
+
+        /// <summary>
+        /// בדיקה: לאחר מחיקה, לא ניתן למצוא את השיוך
+        /// מטרה: לוודא שהשיוך באמת לא קיים יותר
+        /// </summary>
+        [Fact]
+        public void DeleteAssignment_AssignmentCannotBeFoundAfterDeletion()
+        {
+            // Arrange
+            int assignmentId = 1;
+
+            // Act
+            _controller.DeleteAssignment(assignmentId);
+            var result = _controller.GetAssignmentById(assignmentId);
+
+            // Assert
+            Assert.IsType<NotFoundObjectResult>(result);
+        }
+
+        #endregion
+
+        #region GetAssignmentsByProject Tests
+
+        /// <summary>
+        /// בדיקה: שליפת שיוכים לפי פרויקט מחזירה את השיוכים הנכונים
+        /// מטרה: לוודא שהפילטר לפי פרויקט עובד
+        /// </summary>
+        [Fact]
+        public void GetAssignmentsByProject_WithValidProjectId_ReturnsMatchingAssignments()
+        {
+            // Arrange
+            int projectId = 1;
+            
+            // הוספת שיוך נוסף לבדיקה
+            _context.Assignments.Add(new ProjectAssignment 
+            { 
+                Id = 2, 
+                ProjectId = 1, 
+                EmployeeId = 2, 
+                EmployeeRoleInProject = "QA" 
+            });
+
+            // Act
+            var result = _controller.GetAssignmentsByProject(projectId);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var assignments = Assert.IsAssignableFrom<List<ProjectAssignment>>(okResult.Value);
+            Assert.Equal(2, assignments.Count);
+            Assert.All(assignments, a => Assert.Equal(projectId, a.ProjectId));
+        }
+
+        /// <summary>
+        /// בדיקה: חיפוש פרויקט ללא שיוכים מחזיר רשימה ריקה
+        /// מטרה: לוודא שהפונקציה לא זורקת שגיאה כשאין שיוכים
+        /// </summary>
+        [Fact]
+        public void GetAssignmentsByProject_WithNoAssignments_ReturnsEmptyList()
+        {
+            // Arrange
+            int projectId = 2;
+
+            // Act
+            var result = _controller.GetAssignmentsByProject(projectId);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var assignments = Assert.IsAssignableFrom<List<ProjectAssignment>>(okResult.Value);
+            Assert.Empty(assignments);
+        }
+
+        /// <summary>
+        /// בדיקה: חיפוש עם פרויקט לא קיים מחזיר רשימה ריקה
+        /// מטרה: לוודא שהפונקציה מתנהגת כראוי עם פרויקט שלא קיים
+        /// </summary>
+        [Fact]
+        public void GetAssignmentsByProject_WithNonExistingProjectId_ReturnsEmptyList()
+        {
+            // Arrange
+            int nonExistingProjectId = 999;
+
+            // Act
+            var result = _controller.GetAssignmentsByProject(nonExistingProjectId);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var assignments = Assert.IsAssignableFrom<List<ProjectAssignment>>(okResult.Value);
+            Assert.Empty(assignments);
+        }
+
+        #endregion
+    }
+}

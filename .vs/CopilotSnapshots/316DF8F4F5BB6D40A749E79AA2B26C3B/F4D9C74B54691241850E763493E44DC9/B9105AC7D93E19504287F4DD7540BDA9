@@ -1,0 +1,68 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Clean.CORE.Entities;
+using Clean.CORE.IRepositories;
+using Clean.DATA.Data;
+
+namespace Clean.DATA.Repositories
+{
+    public class EmployeeRepository:IemployeeRepository
+    {
+        private readonly IDataContext _context;
+
+        public EmployeeRepository(IDataContext context)
+        {
+            _context = context;
+        }
+
+        public List<Employee> GetAllEmployees()
+        {
+            return _context.Employees.ToList();
+        }
+
+        public Employee? GetEmployeeById(int id)
+        {
+            return _context.Employees.Find(id);
+        }
+
+        public Employee AddEmployee(Employee employee)
+        {
+            var nextId = _context.Employees.Any() ? _context.Employees.Max(e => e.Id) + 1 : 1;
+            employee.Id = nextId;
+            _context.Employees.Add(employee);
+            _context.SaveChanges();
+            return employee;
+        }
+
+        public Employee? UpdateEmployee(int id, Employee updated)
+        {
+            var employee = _context.Employees.Find(id);
+            if (employee == null)
+                return null;
+
+            employee.FullName = updated.FullName;
+            employee.Role = updated.Role;
+            _context.SaveChanges();
+            return employee;
+        }
+
+        public bool DeleteEmployee(int id)
+        {
+            var employee = _context.Employees.Find(id);
+            if (employee == null)
+                return false;
+
+            _context.Employees.Remove(employee);
+            _context.SaveChanges();
+            return true;
+        }
+
+        public List<Employee> GetByRole(string role)
+        {
+            return _context.Employees
+                .Where(e => e.Role.Equals(role, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+        }
+    }
+}
