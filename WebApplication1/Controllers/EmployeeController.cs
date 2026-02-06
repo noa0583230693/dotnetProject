@@ -30,18 +30,18 @@ namespace WebApplication1.Controllers
             /// שליפת כל העובדים
             /// </summary>
             [HttpGet]
-            public IActionResult GetAllEmployees()
+            public async Task<IActionResult> GetAllEmployees()
             {
-                return Ok(_service.GetAll());
+                return Ok(await _service.GetAllAsync());
             }
 
             /// <summary>
             /// שליפת עובד לפי מזהה
             /// </summary>
             [HttpGet("{id}")]
-            public IActionResult GetEmployeeById(int id)
+            public async Task<IActionResult> GetEmployeeByIdAsync(int id)
             {
-                var employee = _service.GetById(id);
+                var employee = await _service.GetByIdAsync(id);
                 if (employee == null)
                     return NotFound("עובד לא נמצא");
 
@@ -52,9 +52,9 @@ namespace WebApplication1.Controllers
         /// שליפת עובד עם שיוכים
         /// </summary>
         [HttpGet("{id}/assignments")]
-        public IActionResult GetEmployeeWithAssignments(int id)
+        public async Task<IActionResult> GetEmployeeWithAssignmentsAsync(int id)
         {
-            var employee = _service.GetEmployeeWithAssignments(id);
+            var employee = await _service.GetEmployeeWithAssignmentsAsync(id);
             if (employee == null)
                 return NotFound("עובד לא נמצא");
 
@@ -75,9 +75,9 @@ namespace WebApplication1.Controllers
         /// הוספת עובד חדש
         /// </summary>
         [HttpPost]
-        public IActionResult AddEmployee(EmployeePost employee)
+        public async Task<IActionResult> AddEmployeeAsync(EmployeePost employee)
         {
-            var added = _service.Add(_mapper.Map<Employee>(employee));
+            var added = await _service.AddAsync(_mapper.Map<Employee>(employee));
             return Ok(added);
         }
 
@@ -85,9 +85,9 @@ namespace WebApplication1.Controllers
         /// עדכון עובד קיים
         /// </summary>
         [HttpPut("{id}")]
-        public IActionResult UpdateEmployee(int id, EmployeePost updated)
+        public async Task<IActionResult> UpdateEmployeeAsync(int id, EmployeePost updated)
         {
-            var employee = _service.Update(id, _mapper.Map<Employee>(updated));
+            var employee = await _service.UpdateAsync(id, _mapper.Map<Employee>(updated));
             if (employee == null)
                 return NotFound("עובד לא נמצא");
 
@@ -97,9 +97,9 @@ namespace WebApplication1.Controllers
         /// מחיקת עובד לפי מזהה
         /// </summary>
         [HttpDelete("{id}")]
-        public IActionResult DeleteEmployee(int id)
+        public async Task<IActionResult> DeleteEmployeeAsync(int id)
         {
-            var deleted = _service.Delete(id);
+            var deleted = await _service.DeleteAsync(id);
             if (!deleted)
                 return NotFound("עובד לא נמצא");
 
@@ -110,9 +110,9 @@ namespace WebApplication1.Controllers
         /// פעולה נוספת: שליפת רשימת העובדים לפי תפקיד
         /// </summary>
         [HttpGet("by-role/{role}")]
-        public IActionResult GetByRole(string role)
+        public async Task<IActionResult> GetByRoleAsync(string role)
         {
-            var list = _service.GetByRole(role);
+            var list = await _service.GetByRoleAsync(role);
             return Ok(list);
         }
 
@@ -120,9 +120,9 @@ namespace WebApplication1.Controllers
 
         //special
         [HttpGet("recommendations/{projectId}")]
-        public IActionResult GetRecommendations(int projectId,string requiredRole)
+        public async Task<IActionResult> GetRecommendationsAsync(int projectId, string requiredRole)
         {
-            var result = _service.GetRecommendedEmployees(projectId, requiredRole);
+            var result = await _service.GetRecommendedEmployeesAsync(projectId, requiredRole);
             return Ok(result);
         }
 

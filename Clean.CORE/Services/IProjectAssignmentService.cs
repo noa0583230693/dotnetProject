@@ -11,20 +11,20 @@ namespace Clean.CORE.Services
     public interface IProjectAssignmentService
     {
 
-        public IEnumerable<ProjectAssignmentDto> GetAll();
+        public Task<IEnumerable<ProjectAssignmentDto>> GetAllAsync();
 
-        public ProjectAssignmentDto? GetById(int id);
+        public Task<ProjectAssignmentDto?> GetByIdAsync(int id);
 
-        public ProjectAssignmentDto Add(ProjectAssignment assignment);
+        public Task<ProjectAssignmentDto> AddAsync(ProjectAssignment assignment);
 
-        public ProjectAssignmentDto? Update(int id, ProjectAssignment updated);
+        public Task<ProjectAssignmentDto?> UpdateAsync(int id, ProjectAssignment updated);
 
-        public bool Delete(int id);
+        public Task<bool> DeleteAsync(int id);
 
-        public IEnumerable<ProjectAssignmentDto> GetByProject(int projectId);
+        public Task<IEnumerable<ProjectAssignmentDto>> GetByProjectAsync(int projectId);
 
-        public IEnumerable<ProjectAssignmentDto> GetAssignmentsByEmployee(int employeeId);
-        public IEnumerable<ProjectAssignmentDto> GetAssignmentsByProject(int projectId);
+        public Task<IEnumerable<ProjectAssignmentDto>> GetAssignmentsByEmployeeAsync(int employeeId);
+        public Task<IEnumerable<ProjectAssignmentDto>> GetAssignmentsByProjectAsync(int projectId);
 
 
       

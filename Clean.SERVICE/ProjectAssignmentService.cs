@@ -20,57 +20,58 @@ namespace Clean.SERVICE
             _mapper = mapper;
         }
 
-        public IEnumerable<ProjectAssignmentDto> GetAll()
+        public async Task<IEnumerable<ProjectAssignmentDto>> GetAllAsync()
         {
-            var list = _repositoryManager.ProjectAssignments.GetAll();
+            var list = await _repositoryManager.ProjectAssignments.GetAllAsync();
             return _mapper.Map<IEnumerable<ProjectAssignmentDto>>(list);
         }
 
-        public ProjectAssignmentDto? GetById(int id)
+        public async Task<ProjectAssignmentDto?> GetByIdAsync(int id)
         {
-            var item = _repositoryManager.ProjectAssignments.GetById(id);
+            var item = await _repositoryManager.ProjectAssignments.GetByIdAsync(id);
             return _mapper.Map<ProjectAssignmentDto>(item);
         }
 
-        public ProjectAssignmentDto Add(ProjectAssignment assignment)
+        public async Task<ProjectAssignmentDto> AddAsync(ProjectAssignment assignment)
         {
-            var newAssignment = _repositoryManager.ProjectAssignments.Add(assignment);
-            _repositoryManager.Save();
+            var newAssignment = await _repositoryManager.ProjectAssignments.AddAsync(assignment);
+            await _repositoryManager.SaveAsync();
             return _mapper.Map<ProjectAssignmentDto>(newAssignment);
         }
 
-        public ProjectAssignmentDto? Update(int id, ProjectAssignment updated)
+        public async Task<ProjectAssignmentDto?> UpdateAsync(int id, ProjectAssignment updated)
         {
-            var tmp=_repositoryManager.ProjectAssignments.Update(id, updated);
-            _repositoryManager.Save();
+            var tmp = await _repositoryManager.ProjectAssignments.UpdateAsync(id, updated);
+            await _repositoryManager.SaveAsync();
             return _mapper.Map<ProjectAssignmentDto>(tmp);
         }
 
-        public bool Delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            var isDeleted = _repositoryManager.ProjectAssignments.Delete(id);
-            if (isDeleted) _repositoryManager.Save();
+            var isDeleted = await _repositoryManager.ProjectAssignments.DeleteAsync(id);
+            if (isDeleted) await _repositoryManager.SaveAsync();
             return isDeleted;
         }
 
-        public IEnumerable<ProjectAssignmentDto> GetByProject(int projectId)
+        public async Task<IEnumerable<ProjectAssignmentDto>> GetByProjectAsync(int projectId)
         {
-            var list = _repositoryManager.ProjectAssignments.GetAssignmentsByProject(projectId);
+            var list = await _repositoryManager.ProjectAssignments.GetAssignmentsByProjectAsync(projectId);
             return _mapper.Map<IEnumerable<ProjectAssignmentDto>>(list);
         }
+            
 
-        public IEnumerable<ProjectAssignmentDto> GetAssignmentsByEmployee(int employeeId)
+        public async Task<IEnumerable<ProjectAssignmentDto>> GetAssignmentsByEmployeeAsync(int employeeId)
         {
-            var list = _repositoryManager.ProjectAssignments.GetAssignmentsByEmployee(employeeId);
+            var list = await _repositoryManager.ProjectAssignments.GetAssignmentsByEmployeeAsync(employeeId);
             return _mapper.Map<IEnumerable<ProjectAssignmentDto>>(list);
       }
 
-        public IEnumerable<ProjectAssignmentDto> GetAssignmentsByProject(int projectId)
+        public async Task<IEnumerable<ProjectAssignmentDto>> GetAssignmentsByProjectAsync(int projectId)
         {
-            var list = _repositoryManager.ProjectAssignments.GetAssignmentsByProject(projectId);
+            var list = await _repositoryManager.ProjectAssignments.GetAssignmentsByProjectAsync(projectId);
             return _mapper.Map<IEnumerable<ProjectAssignmentDto>>(list);
         }
-
+     
      
     }
 }

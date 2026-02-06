@@ -10,23 +10,23 @@ namespace Clean.CORE.Services
 {
     public interface IEmployeeService
     {
-        public IEnumerable<EmployeeDto> GetAll();
+        public Task<IEnumerable<EmployeeDto>> GetAllAsync();
 
-        public EmployeeDto? GetById(int id);
+        public Task<EmployeeDto?> GetByIdAsync(int id);
 
-        public EmployeeDto Add(Employee employee);
+        public Task<EmployeeDto> AddAsync(Employee employee);
 
-        public EmployeeDto? Update(int id, Employee updated);
+        public Task<EmployeeDto?> UpdateAsync(int id, Employee updated);
 
-        public bool Delete(int id);
+        public Task<bool> DeleteAsync(int id);
 
-        public IEnumerable<EmployeeDto> GetByRole(string role);
+        public Task<IEnumerable<EmployeeDto>> GetByRoleAsync(string role);
 
-        public EmployeeWithAssignmentsDto? GetEmployeeWithAssignments(int id);
+        public Task<EmployeeWithAssignmentsDto?> GetEmployeeWithAssignmentsAsync(int id);
 
 
         //special
-        IEnumerable<RecommendedEmployeeDto> GetRecommendedEmployees(int projectId,string requiredRole);
+       public Task<IEnumerable<RecommendedEmployeeDto>> GetRecommendedEmployeesAsync(int projectId,string requiredRole);
 
     }
 }

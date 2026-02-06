@@ -11,16 +11,16 @@ namespace Clean.CORE.IRepositories
     public interface IProjectRepository : IRepository<Project>
     {
 
-        public IEnumerable<Project> SearchProject(string keyword);
+        public Task<IEnumerable<Project>> SearchProjectAsync(string keyword);
 
         // מביא את כל הפרויקטים עם כל העובדים
-        public IEnumerable<Project> GetAllWithAssignments();
+        public Task<IEnumerable<Project>> GetAllWithAssignmentsAsync();
 
         // מביא פרויקט לפי Id כולל כל העובדים שלו
-        public Project? GetByIdWithAssignments(int id);
+        public Task<Project?> GetByIdWithAssignmentsAsync(int id);
 
         //מביא את הפרויקט עם העובדים עם השיוכים של העובדים עבור חישוב ציון לפרויקט
-        public   Task<Project?> GetByIdWithDetailsAsync(int id);
+        public Task<Project?> GetByIdWithDetailsAsync(int id);
 
     }
 }

@@ -16,26 +16,29 @@ namespace Clean.DATA.Repositories
         }
 
 
-        public IEnumerable<Project> SearchProject(string keyword)
+     
+        public async Task<IEnumerable<Project>> SearchProjectAsync(string keyword)
         {
-            return _context.Projects
-                .Where(p => p.Name.Contains(keyword, System.StringComparison.OrdinalIgnoreCase));
+            return await _context.Projects
+                .Where(p => p.Name.Contains(keyword, System.StringComparison.OrdinalIgnoreCase))
+                .ToListAsync();
         }
 
-        public IEnumerable<Project> GetAllWithAssignments()
+        public async Task<IEnumerable<Project>> GetAllWithAssignmentsAsync()
         {
-            return _context.Projects
+            return await _context.Projects
               .Include(p =>  p.Assignments)
               .ThenInclude(a => a.Employee)
-              .ToList();
+              .ToListAsync();
         }
 
-        public Project? GetByIdWithAssignments(int id)
+
+        public async Task<Project?> GetByIdWithAssignmentsAsync(int id)
         {
-            return _context.Projects
+            return await _context.Projects
                      .Include(p => p.Assignments)
                      .ThenInclude(a => a.Employee)
-                     .FirstOrDefault(p => p.Id == id);
+                     .FirstOrDefaultAsync(p => p.Id == id);
         }
         public  async Task<Project?> GetByIdWithDetailsAsync(int id)
         {

@@ -25,27 +25,27 @@ namespace WebApplication1.Controllers
         /// שליפת רשימת כל הפרויקטים
         /// </summary>
         [HttpGet]
-        public IActionResult GetAllProjects()
+        public async Task<IActionResult> GetAllProjects()
         {
-            return Ok(_service.GetAll());
+            return Ok(await _service.GetAllAsync());
         }
 
         /// <summary>
         /// שליפת כל הפרויקטים כולל שיוכים
         /// </summary>
         [HttpGet("with-assignments")]
-        public IActionResult GetAllWithAssignments()
+        public async Task<IActionResult> GetAllWithAssignments()
         {
-            return Ok(_service.GetAllWithAssignments());
+            return Ok(await _service.GetAllWithAssignmentsAsync());
         }
 
         /// <summary>
         /// שליפת פרויקט בודד לפי מזהה
         /// </summary>
         [HttpGet("{id}")]
-        public IActionResult GetProjectById(int id)
+        public async Task<IActionResult> GetProjectById(int id)
         {
-            var project = _service.GetById(id);
+            var project = await _service.GetByIdAsync(id);
             if (project == null)
                 return NotFound("פרויקט לא נמצא");
 
@@ -56,9 +56,9 @@ namespace WebApplication1.Controllers
         /// שליפת פרויקט כולל שיוכים
         /// </summary>
         [HttpGet("{id}/assignments")]
-        public IActionResult GetProjectByIdWithAssignments(int id)
+        public  async Task<IActionResult> GetProjectByIdWithAssignments(int id)
         {
-            var project = _service.GetByIdWithAssignments(id);
+            var project = await _service.GetByIdWithAssignmentsAsync(id);
             if (project == null)
                 return NotFound("פרויקט לא נמצא");
 
@@ -69,9 +69,9 @@ namespace WebApplication1.Controllers
         /// הוספת פרויקט חדש
         /// </summary>
         [HttpPost]
-        public IActionResult AddProject(ProjectPost project)
+        public async Task<IActionResult> AddProject(ProjectPost project)
         {
-            var added = _service.Add(_mapper.Map<Project>(project));
+            var added = await _service.AddAsync(_mapper.Map<Project>(project));
             return Ok(added);
         }
 
@@ -79,9 +79,9 @@ namespace WebApplication1.Controllers
         /// עדכון פרויקט קיים
         /// </summary>
         [HttpPut("{id}")]
-        public IActionResult UpdateProject(int id, ProjectPost updated)
+        public async Task<IActionResult> UpdateProject(int id, ProjectPost updated)
         {
-            var project = _service.Update(id, _mapper.Map<Project>(updated));
+            var project = await _service.UpdateAsync(id, _mapper.Map<Project>(updated));
             if (project == null)
                 return NotFound("פרויקט לא נמצא");
 
@@ -92,9 +92,9 @@ namespace WebApplication1.Controllers
         /// מחיקת פרויקט לפי מזהה
         /// </summary>
         [HttpDelete("{id}")]
-        public IActionResult DeleteProject(int id)
+        public async Task<IActionResult> DeleteProject(int id)
         {
-            var deleted = _service.Delete(id);
+            var deleted = await _service.DeleteAsync(id);
             if (!deleted)
                 return NotFound("פרויקט לא נמצא");
 
@@ -105,9 +105,9 @@ namespace WebApplication1.Controllers
         /// חיפוש פרויקטים לפי מילה בשם
         /// </summary>
         [HttpGet("search/{keyword}")]
-        public IActionResult SearchProject(string keyword)
+        public async Task<IActionResult> SearchProject(string keyword)
         {
-            var results = _service.Search(keyword);
+            var results = await _service.SearchAsync(keyword);
             return Ok(results);
         }
 

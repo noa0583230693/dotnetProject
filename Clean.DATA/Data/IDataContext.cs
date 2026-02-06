@@ -1,6 +1,7 @@
 using Clean.CORE.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 
 
@@ -28,6 +29,7 @@ namespace Clean.DATA.Data
         /// </summary>
         DbSet<ProjectAssignment> Assignments { get; set; }
         int SaveChanges();
+        Task<int> SaveChangesAsync();
 
     }
 }

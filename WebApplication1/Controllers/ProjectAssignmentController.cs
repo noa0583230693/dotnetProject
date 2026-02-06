@@ -33,18 +33,18 @@ namespace WebApplication1.Controllers
         /// שליפת כל השיוכים
         /// </summary>
         [HttpGet]
-        public IActionResult GetAllAssignments()
+        public async Task<IActionResult> GetAllAssignments()
         {
-            return Ok(_service.GetAll());
+            return Ok(await _service.GetAllAsync());
         }
 
         /// <summary>
         /// שליפת שיוך בודד לפי מזהה
         /// </summary>
         [HttpGet("{id}")]
-        public IActionResult GetAssignmentById(int id)
+        public async Task<IActionResult> GetAssignmentById(int id)
         {
-            var assignment = _service.GetById(id);
+            var assignment = await _service.GetByIdAsync(id);
             if (assignment == null)
                 return NotFound("שיוך לא נמצא");
 
@@ -55,9 +55,9 @@ namespace WebApplication1.Controllers
         /// שליפת כל השיוכים של עובד מסוים
         /// </summary>
         [HttpGet("by-employee/{employeeId}")]
-        public IActionResult GetAssignmentsByEmployee(int employeeId)
+        public  async Task<IActionResult> GetAssignmentsByEmployee(int employeeId)
         {
-            var list = _service.GetAssignmentsByEmployee(employeeId);
+            var list = await _service.GetAssignmentsByEmployeeAsync(employeeId);
             return Ok(list);
         }
 
@@ -65,9 +65,9 @@ namespace WebApplication1.Controllers
         /// שליפת כל השיוכים של פרויקט מסוים
         /// </summary>
         [HttpGet("by-project/{projectId}")]
-        public IActionResult GetAssignmentsByProject(int projectId)
+        public async Task<IActionResult> GetAssignmentsByProject(int projectId)
         {
-            var list = _service.GetAssignmentsByProject(projectId);
+            var list = await _service.GetAssignmentsByProjectAsync(projectId);
             return Ok(list);
         }
 
@@ -75,9 +75,9 @@ namespace WebApplication1.Controllers
         /// הוספת שיוך חדש בין עובד לפרויקט
         /// </summary>
         [HttpPost]
-        public IActionResult AddAssignment(ProjectAssignmentPost assignment)
+        public async Task<IActionResult> AddAssignment(ProjectAssignmentPost assignment)
         {
-            var added = _service.Add(_mapper.Map<ProjectAssignment>(assignment));
+            var added = await _service.AddAsync(_mapper.Map<ProjectAssignment>(assignment));
             return Ok(added);
         }
 
@@ -85,9 +85,9 @@ namespace WebApplication1.Controllers
         /// עדכון נתוני שיוך קיים
         /// </summary>
         [HttpPut("{id}")]
-        public IActionResult UpdateAssignment(int id, ProjectAssignmentPost updated)
+        public async Task<IActionResult> UpdateAssignment(int id, ProjectAssignmentPost updated)
         {
-            var assignment = _service.Update(id, _mapper.Map<ProjectAssignment>(updated));
+            var assignment = await _service.UpdateAsync(id, _mapper.Map<ProjectAssignment>(updated));
             if (assignment == null)
                 return NotFound("שיוך לא נמצא");
 
@@ -98,9 +98,9 @@ namespace WebApplication1.Controllers
         /// מחיקת שיוך
         /// </summary>
         [HttpDelete("{id}")]
-        public IActionResult DeleteAssignment(int id)
+        public async Task<IActionResult> DeleteAssignment(int id)
         {
-            var deleted = _service.Delete(id);
+            var deleted = await _service.DeleteAsync(id);
             if (!deleted)
                 return NotFound("שיוך לא נמצא");
 

@@ -11,19 +11,19 @@ namespace Clean.CORE.Services
     public interface IProjectService
     {
 
-        public IEnumerable<ProjectDto> GetAll();
+        public Task<IEnumerable<ProjectDto>> GetAllAsync();
 
-        public ProjectDto? GetById(int id);
+        public Task<ProjectDto?> GetByIdAsync(int id);
 
-        public ProjectDto Add(Project project);
+        public Task<ProjectDto> AddAsync(Project project);
 
-        public ProjectDto? Update(int id, Project updated);
+        public Task<ProjectDto?> UpdateAsync(int id, Project updated);
 
-        public bool Delete(int id);
+        public Task<bool> DeleteAsync(int id);
 
-        public IEnumerable<ProjectDto> Search(string keyword);
-        public ProjectWithAssignmentsDto? GetByIdWithAssignments(int id);
-        public IEnumerable<ProjectWithAssignmentsDto> GetAllWithAssignments();
+        public Task<IEnumerable<ProjectDto>> SearchAsync(string keyword);
+        public Task<ProjectWithAssignmentsDto?> GetByIdWithAssignmentsAsync(int id);
+        public Task<IEnumerable<ProjectWithAssignmentsDto>> GetAllWithAssignmentsAsync();
         //special
        public  Task<ProjectStabilityDto> GetProjectStabilityAsync(int projectId);
     }

@@ -8,10 +8,10 @@ namespace Clean.CORE.Repositories
 {
     public interface IRepositoryManager
     {
-      public  IProjectRepository Projects { get; }
+        public IProjectRepository Projects { get; }
         public IemployeeRepository Employees { get; }
         public IProjectAssignmentRepository ProjectAssignments { get; }
 
-        void Save();
+        Task SaveAsync();
     }
 }

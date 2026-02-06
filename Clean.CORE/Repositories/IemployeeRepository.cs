@@ -10,12 +10,12 @@ namespace Clean.CORE.IRepositories
 {
     public interface IemployeeRepository: IRepository<Employee>
     {
-        public IEnumerable<Employee> GetByRole(string role);
+        public  Task<IEnumerable<Employee>> GetByRoleAsync(string role);
 
        
-        public Employee? GetEmployeeWithAssignments(int id);
+        public Task<Employee?> GetEmployeeWithAssignmentsAsync(int id);
 
-        public void AddAssignment(int employeeId, int projectId, string roleInProject);
+        public Task AddAssignmentAsync(int employeeId, int projectId, string roleInProject);
 
     }
 }

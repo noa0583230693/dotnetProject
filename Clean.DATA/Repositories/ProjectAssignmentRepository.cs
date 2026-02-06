@@ -4,11 +4,12 @@ using Clean.DATA.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Clean.DATA.Repositories
 {
     public class ProjectAssignmentRepository: Repository<ProjectAssignment>,IProjectAssignmentRepository
-    {
+    {               
         private readonly IDataContext _context;
 
         public ProjectAssignmentRepository(DataContext context):base(context) {
@@ -18,23 +19,23 @@ namespace Clean.DATA.Repositories
 
       
         // מביא את כל השיוכים של פרויקט מסוים כולל העובדים
-        public IEnumerable<ProjectAssignment> GetAssignmentsByProject(int projectId)
+        public async Task<IEnumerable<ProjectAssignment>> GetAssignmentsByProjectAsync(int projectId)
         {
-            return _context.Assignments
+            return await _context.Assignments
                            .Where(a => a.ProjectId == projectId)
                            .Include(a => a.Employee)
                            .Include(a => a.Project)
-                           .ToList();
+                           .ToListAsync();
         }
 
         // מביא את כל השיוכים של עובד מסוים כולל הפרויקטים
-        public IEnumerable<ProjectAssignment> GetAssignmentsByEmployee(int employeeId)
+        public async Task<IEnumerable<ProjectAssignment>> GetAssignmentsByEmployeeAsync(int employeeId)
         {
-            return _context.Assignments
+            return await _context.Assignments
                            .Where(a => a.EmployeeId == employeeId)
                            .Include(a => a.Employee)
                            .Include(a => a.Project)
-                           .ToList();
+                           .ToListAsync();
         }
 
    

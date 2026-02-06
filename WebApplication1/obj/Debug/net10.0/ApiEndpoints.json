@@ -122,7 +122,7 @@
   },
   {
     "ContainingType": "WebApplication1.Controllers.EmployeeController",
-    "Method": "AddEmployee",
+    "Method": "AddEmployeeAsync",
     "RelativePath": "api/employees",
     "HttpMethod": "POST",
     "IsController": true,
@@ -138,7 +138,7 @@
   },
   {
     "ContainingType": "WebApplication1.Controllers.EmployeeController",
-    "Method": "GetEmployeeById",
+    "Method": "GetEmployeeByIdAsync",
     "RelativePath": "api/employees/{id}",
     "HttpMethod": "GET",
     "IsController": true,
@@ -154,7 +154,7 @@
   },
   {
     "ContainingType": "WebApplication1.Controllers.EmployeeController",
-    "Method": "UpdateEmployee",
+    "Method": "UpdateEmployeeAsync",
     "RelativePath": "api/employees/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
@@ -175,7 +175,7 @@
   },
   {
     "ContainingType": "WebApplication1.Controllers.EmployeeController",
-    "Method": "DeleteEmployee",
+    "Method": "DeleteEmployeeAsync",
     "RelativePath": "api/employees/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
@@ -191,7 +191,7 @@
   },
   {
     "ContainingType": "WebApplication1.Controllers.EmployeeController",
-    "Method": "GetEmployeeWithAssignments",
+    "Method": "GetEmployeeWithAssignmentsAsync",
     "RelativePath": "api/employees/{id}/assignments",
     "HttpMethod": "GET",
     "IsController": true,
@@ -207,7 +207,7 @@
   },
   {
     "ContainingType": "WebApplication1.Controllers.EmployeeController",
-    "Method": "GetByRole",
+    "Method": "GetByRoleAsync",
     "RelativePath": "api/employees/by-role/{role}",
     "HttpMethod": "GET",
     "IsController": true,
@@ -223,7 +223,7 @@
   },
   {
     "ContainingType": "WebApplication1.Controllers.EmployeeController",
-    "Method": "GetRecommendations",
+    "Method": "GetRecommendationsAsync",
     "RelativePath": "api/employees/recommendations/{projectId}",
     "HttpMethod": "GET",
     "IsController": true,

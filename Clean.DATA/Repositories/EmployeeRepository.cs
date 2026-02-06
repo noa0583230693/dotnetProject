@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Clean.DATA.Repositories
 {
@@ -17,21 +18,29 @@ namespace Clean.DATA.Repositories
             _context = context;
         }
 
- 
-        public IEnumerable<Employee> GetByRole(string role)
+
+        public async Task<IEnumerable<Employee>> GetByRoleAsync(string role)
         {
-            return _context.Employees
-                .Where(e => e.Role.Equals(role, StringComparison.OrdinalIgnoreCase));
+            if (string.IsNullOrWhiteSpace(role))
+                return Enumerable.Empty<Employee>();
+
+            var normalized = role.ToLowerInvariant();
+
+            var employees = await _context.Employees
+                .Where(e => e.Role != null && e.Role.ToLower() == normalized)
+                .ToListAsync();
+
+            return employees;
         }
 
-        public Employee? GetEmployeeWithAssignments(int id)
+        public Task<Employee?> GetEmployeeWithAssignmentsAsync(int id)
         {
             return _context.Employees
                                       .Include(e => e.Assignments)
                                       .ThenInclude(a => a.Project)
-                                      .FirstOrDefault(e => e.Id == id);
+                                      .FirstOrDefaultAsync(e => e.Id == id);
         }
-        public void AddAssignment(int employeeId, int projectId, string roleInProject)
+        public async Task AddAssignmentAsync(int employeeId, int projectId, string roleInProject)
         {
             var assignment = new ProjectAssignment
             {
@@ -39,8 +48,9 @@ namespace Clean.DATA.Repositories
                 ProjectId = projectId,
                 EmployeeRoleInProject = roleInProject
             };
+
             _context.Assignments.Add(assignment);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
     }

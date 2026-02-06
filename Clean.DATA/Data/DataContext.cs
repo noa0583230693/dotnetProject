@@ -10,6 +10,16 @@ namespace Clean.DATA.Data
          : base(options)
         {
         }
+
+        public int SaveChanges()
+        {
+            return base.SaveChanges();
+        }
+
+        public Task<int> SaveChangesAsync()
+        {
+            return base.SaveChangesAsync();
+        }
         public DbSet<Project> Projects { get; set; }
      
         public DbSet<Employee> Employees { get; set; }

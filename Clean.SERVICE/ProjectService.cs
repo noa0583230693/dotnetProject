@@ -19,58 +19,60 @@ namespace Clean.SERVICE
             _mapper = mapper;
         }
 
-        public IEnumerable<ProjectDto> GetAll()
+        public async Task<IEnumerable<ProjectDto>> GetAllAsync()
         {
-            var list = _repositoryManager.Projects.GetAll();
+            var list = await _repositoryManager.Projects.GetAllAsync();
             return _mapper.Map<IEnumerable<ProjectDto>>(list);
         }
 
-        public ProjectDto? GetById(int id)
+        public async Task<ProjectDto?> GetByIdAsync(int id)
         {
-            var proj = _repositoryManager.Projects.GetById(id);
+            var proj = await _repositoryManager.Projects.GetByIdAsync(id);
             return _mapper.Map<ProjectDto>(proj);
         }
+       
 
-        public IEnumerable<ProjectDto> Search(string keyword)
+        public async Task<IEnumerable<ProjectDto>> SearchAsync(string keyword)
         {
-            var list = _repositoryManager.Projects.SearchProject(keyword);
+            var list = await _repositoryManager.Projects.SearchProjectAsync(keyword);
             return _mapper.Map<IEnumerable<ProjectDto>>(list);
         }
 
-        public ProjectDto Add(Project project)
+        public async Task<ProjectDto> AddAsync(Project project)
         {
-            var newProject = _repositoryManager.Projects.Add(project);
-            _repositoryManager.Save();
+            var newProject = await _repositoryManager.Projects.AddAsync(project);
+            await _repositoryManager.SaveAsync();
             return _mapper.Map<ProjectDto>(newProject);
         }
 
-        public ProjectDto? Update(int id, Project updated)
+        public async Task<ProjectDto?> UpdateAsync(int id, Project updated)
         {
-            var proj = _repositoryManager.Projects.Update(id, updated);
-            _repositoryManager.Save();
+            var proj = await _repositoryManager.Projects.UpdateAsync(id, updated);
+            await _repositoryManager.SaveAsync();
             return _mapper.Map<ProjectDto>(proj);
         }
 
-        public bool Delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            bool isDeleted = _repositoryManager.Projects.Delete(id);
+            bool isDeleted = await _repositoryManager.Projects.DeleteAsync(id);
             if (isDeleted)
             {
-                _repositoryManager.Save();
+                await _repositoryManager.SaveAsync();
             }
-
-            return isDeleted;
+            return isDeleted        ;
         }
 
-        public ProjectWithAssignmentsDto? GetByIdWithAssignments(int id)
+     
+
+        public async Task<ProjectWithAssignmentsDto?> GetByIdWithAssignmentsAsync(int id)
         {
-            var proj = _repositoryManager.Projects.GetByIdWithAssignments(id);
+            var proj = await _repositoryManager.Projects.GetByIdWithAssignmentsAsync(id);
             return _mapper.Map<ProjectWithAssignmentsDto>(proj);
         }
 
-        public IEnumerable<ProjectWithAssignmentsDto> GetAllWithAssignments()
+        public async Task<IEnumerable<ProjectWithAssignmentsDto>> GetAllWithAssignmentsAsync()
         {
-            var list = _repositoryManager.Projects.GetAllWithAssignments();
+            var list = await _repositoryManager.Projects.GetAllWithAssignmentsAsync();
             return _mapper.Map<IEnumerable<ProjectWithAssignmentsDto>>(list);
         }
 

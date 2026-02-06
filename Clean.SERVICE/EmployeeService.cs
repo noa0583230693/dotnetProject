@@ -6,6 +6,8 @@ using Clean.CORE.Repositories;
 using Clean.CORE.Services;
 using Clean.DATA.Repositories;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Clean.SERVICE
 {
@@ -20,60 +22,60 @@ namespace Clean.SERVICE
             _mapper = mapper;
         }
 
-        public IEnumerable<EmployeeDto> GetAll()
+        public async Task<IEnumerable<EmployeeDto>> GetAllAsync()
         {
-            var list= _repositoryManager.Employees.GetAll();
+            var list = await _repositoryManager.Employees.GetAllAsync();
             return _mapper.Map<IEnumerable<EmployeeDto>>(list);
         }
 
-        public EmployeeDto? GetById(int id)
+        public async Task<EmployeeDto?> GetByIdAsync(int id)
         {
-            var Employee= _repositoryManager.Employees.GetById(id);
+            var Employee = await _repositoryManager.Employees.GetByIdAsync(id);
             return _mapper.Map<EmployeeDto>(Employee);
         }
 
-        public EmployeeDto Add(Employee employee)
+        public async Task<EmployeeDto> AddAsync(Employee employee)
         {
-            var newEmployee = _repositoryManager.Employees.Add(employee);
-            _repositoryManager.Save();
+            var newEmployee = await _repositoryManager.Employees.AddAsync(employee);
+            await _repositoryManager.SaveAsync();
             return _mapper.Map<EmployeeDto>(newEmployee);
         }
 
-        public EmployeeDto? Update(int id, Employee updated)
+        public async Task<EmployeeDto?> UpdateAsync(int id, Employee updated)
         {
-            var emp = _repositoryManager.Employees.Update(id, updated);
-            _repositoryManager.Save();
+            var emp = await _repositoryManager.Employees.UpdateAsync(id, updated);
+            await _repositoryManager.SaveAsync();
             return _mapper.Map<EmployeeDto>(emp);
         }
 
-        public bool Delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            var isDeleted = _repositoryManager.Employees.Delete(id);
+            var isDeleted = await _repositoryManager.Employees.DeleteAsync(id);
             if (isDeleted)
             {
-                _repositoryManager.Save();
+                await _repositoryManager.SaveAsync();
             }
             return isDeleted;
         }
 
-        public IEnumerable<EmployeeDto> GetByRole(string role)
+        public async Task<IEnumerable<EmployeeDto>> GetByRoleAsync(string role)
         {
-            var list = _repositoryManager.Employees.GetByRole(role);
+            var list = await _repositoryManager.Employees.GetByRoleAsync(role);
             return _mapper.Map<IEnumerable<EmployeeDto>>(list);
         }
 
-        public EmployeeWithAssignmentsDto? GetEmployeeWithAssignments(int id)
+        public async Task<EmployeeWithAssignmentsDto?> GetEmployeeWithAssignmentsAsync(int id)
         {
-            var emp = _repositoryManager.Employees.GetEmployeeWithAssignments(id);
+            var emp = await _repositoryManager.Employees.GetEmployeeWithAssignmentsAsync(id);
             return _mapper.Map<EmployeeWithAssignmentsDto>(emp);
         }
 
-        public IEnumerable<RecommendedEmployeeDto> GetRecommendedEmployees(int projectId,string requiredRole)
+        public async Task<IEnumerable<RecommendedEmployeeDto>> GetRecommendedEmployeesAsync(int projectId,string requiredRole)
         {
             //שלב ראשון העובדים המתאימים רק מי שהוא בתפקיד 
             // שליפת כל העובדים מהרפוזיטורי
-            var allEmployees = _repositoryManager.Employees.GetAll()
-                .Where(e => e.Role.ToLower() == requiredRole.ToLower());
+            var allEmployees = (await _repositoryManager.Employees.GetAllAsync())
+                .Where(e => e.Role != null && e.Role.ToLower() == requiredRole.ToLower());
             // לוגיקה: מסננים עובדים שכבר משויכים לפרויקט הזה וממיינים לפי עומס
             var recommended = allEmployees
                 .Where(e => !e.Assignments.Any(a => a.ProjectId == projectId))
@@ -89,5 +91,7 @@ namespace Clean.SERVICE
 
             return recommended;
         }
+
+     
     }
 }

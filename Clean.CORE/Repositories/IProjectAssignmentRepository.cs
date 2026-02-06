@@ -11,9 +11,9 @@ namespace Clean.CORE.IRepositories
 {
     public interface IProjectAssignmentRepository: IRepository<ProjectAssignment>
     {
-      
-        public IEnumerable<ProjectAssignment> GetAssignmentsByProject(int projectId);
-        public IEnumerable<ProjectAssignment> GetAssignmentsByEmployee(int employeeId);
+        public Task<IEnumerable<ProjectAssignment>> GetAssignmentsByProjectAsync(int projectId);
+        public Task<IEnumerable<ProjectAssignment>> GetAssignmentsByEmployeeAsync(int employeeId);
+
 
 
     }

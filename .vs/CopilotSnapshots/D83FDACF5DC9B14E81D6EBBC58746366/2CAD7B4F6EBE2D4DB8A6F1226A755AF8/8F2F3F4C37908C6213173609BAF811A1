@@ -1,0 +1,93 @@
+﻿using AutoMapper;
+using Clean.CORE.DTO;
+using Clean.CORE.Entities;
+using Clean.CORE.IRepositories;
+using Clean.CORE.Repositories;
+using Clean.CORE.Services;
+using Clean.DATA.Repositories;
+using System.Collections.Generic;
+
+namespace Clean.SERVICE
+{
+    public class EmployeeService :IEmployeeService // מגדירה את הלוגיקה העיסקית עבור עובדים
+    {
+        private readonly IRepositoryManager _repositoryManager;
+        private readonly IMapper _mapper;
+
+        public EmployeeService(IRepositoryManager repositoryManager,IMapper mapper)
+        {
+            _repositoryManager = repositoryManager;
+            _mapper = mapper;
+        }
+
+        public async Task<IEnumerable<EmployeeDto>> GetAllAsync()
+        {
+            var list= await _repositoryManager.Employees.GetAllAsync();
+            return _mapper.Map<IEnumerable<EmployeeDto>>(list);
+        }
+
+        public async Task<EmployeeDto?> GetByIdAsync(int id)
+        {
+            var Employee= await _repositoryManager.Employees.GetByIdAsync(id);
+            return _mapper.Map<EmployeeDto>(Employee);
+        }
+
+        public async Task<EmployeeDto> AddAsync(Employee employee)
+        {
+            var newEmployee = await _repositoryManager.Employees.AddAsync(employee);
+            await _repositoryManager.SaveAsync();
+            return _mapper.Map<EmployeeDto>(newEmployee);
+        }
+
+        public async Task<EmployeeDto?> UpdateAsync(int id, Employee updated)
+        {
+            var emp = await _repositoryManager.Employees.UpdateAsync(id, updated);
+            await _repositoryManager.SaveAsync();
+            return _mapper.Map<EmployeeDto>(emp);
+        }
+
+        public async Task<bool> DeleteAsync(int id)
+        {
+            var isDeleted = await _repositoryManager.Employees.DeleteAsync(id);
+            if (isDeleted)
+            {
+                await _repositoryManager.SaveAsync();
+            }
+            return isDeleted;
+        }
+
+        public async Task<IEnumerable<EmployeeDto>> GetByRoleAsync(string role)
+        {
+            var list = _repositoryManager.Employees.GetByRole(role);
+            return _mapper.Map<IEnumerable<EmployeeDto>>(list);
+        }
+
+        public  EmployeeWithAssignmentsDto? GetEmployeeWithAssignments(int id)
+        {
+            var emp = _repositoryManager.Employees.GetEmployeeWithAssignments(id);
+            return _mapper.Map<EmployeeWithAssignmentsDto>(emp);
+        }
+
+        public async Task<IEnumerable<RecommendedEmployeeDto>> GetRecommendedEmployeesAsync(int projectId,string requiredRole)
+        {
+            //שלב ראשון העובדים המתאימים רק מי שהוא בתפקיד 
+            // שליפת כל העובדים מהרפוזיטורי
+            var allEmployees = await _repositoryManager.Employees.GetAllAsync()
+                .Where(e => e.Role.ToLower() == requiredRole.ToLower());
+            // לוגיקה: מסננים עובדים שכבר משויכים לפרויקט הזה וממיינים לפי עומס
+            var recommended = allEmployees
+                .Where(e => !e.Assignments.Any(a => a.ProjectId == projectId))
+                .OrderBy(e => e.Assignments.Count)
+                .Select(e => new RecommendedEmployeeDto
+                {
+                    EmployeeId = e.Id,
+                    FullName = e.FullName,
+                    CurrentProjectCount = e.Assignments.Count,
+                    MatchReason = e.Assignments.Count == 0 ? "פנוי לחלוטין" : "עומס עבודה נמוך"
+                })
+                .Take(5); // מחזירים רק את ה-5 הכי פנויים
+
+            return recommended;
+        }
+    }
+}
