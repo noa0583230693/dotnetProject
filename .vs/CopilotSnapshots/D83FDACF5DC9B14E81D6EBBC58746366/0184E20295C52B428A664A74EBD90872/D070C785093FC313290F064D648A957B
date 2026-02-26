@@ -1,0 +1,123 @@
+﻿using AutoMapper;
+using Clean.API;
+using Clean.API.MiddleWares;
+using Clean.CORE;
+using Clean.CORE.Entities;
+using Clean.CORE.IRepositories;
+using Clean.CORE.Repositories;
+using Clean.CORE.Services;
+using Clean.DATA.Data;
+using Clean.DATA.Repositories;
+using Clean.SERVICE;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System.Text;
+using System.Text.Json.Serialization;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    options.JsonSerializerOptions.WriteIndented = true;
+});
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Name = "Authorization",
+        Description = "Bearer Authentication with JWT Token",
+        Type = SecuritySchemeType.Http
+    });
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new List<string>()
+        }
+    });
+});
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();//עבור הקונטרולרים
+builder.Services.AddScoped<IProjectService, ProjectService>();
+builder.Services.AddScoped<IProjectAssignmentService, ProjectAssignmentService>();
+
+builder.Services.AddDbContext<DataContext>(options =>
+    options.UseSqlServer(
+        "Server=(localdb)\\MSSQLLocalDB;Database=my_db;Trusted_Connection=True"
+    )
+);
+
+builder.Services.AddAutoMapper(cfg => { cfg.AddProfile<DtoMappingProfile>(); cfg.AddProfile<PostMappingProfile>(); });
+
+
+
+builder.Services.AddScoped<IemployeeRepository, EmployeeRepository>();
+builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+builder.Services.AddScoped<IProjectAssignmentRepository, ProjectAssignmentRepository>();
+
+builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));//כרגע לא בשימוש כי אין מחלקה שרק ממשת את rrepository בלימהוספת פונקציה משלה
+// 1. הגדרת שירות האימות
+builder.Services.AddAuthentication(options =>
+{
+    // הגדרה שברירת המחדל של אימות תהיה באמצעות JWT
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    // 2. הגדרת הפרמטרים לאימות הטוקן שמגיע מהלקוח
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true, // האם לבדוק מי הנפיק את הטוקן?
+        ValidateAudience = true, // האם לבדוק למי מיועד הטוקן?
+        ValidateLifetime = true, // האם לבדוק שהטוקן לא פג תוקף?
+        ValidateIssuerSigningKey = true, // האם לאמת את החתימה הדיגיטלית?
+
+        // משיכת הנתונים שהגדרנו מקודם ב-appsettings.json
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+    };
+});
+
+
+
+
+var app = builder.Build();
+
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+    c.RoutePrefix = string.Empty; // Swagger יהיה בדף הראשי
+});
+
+
+
+
+
+
+app.UseHttpsRedirection();
+app.UseAuthentication(); // זה השלב שבודק "מי אתה?"
+app.UseAuthorization();  // זה השלב שבודק "מה מותר לך?"
+app.UseMiddleware<TrackMiddleWare>();
+app.UseMiddleware<ShabbatMiddleware>();
+
+app.MapControllers();
+
+app.Run();

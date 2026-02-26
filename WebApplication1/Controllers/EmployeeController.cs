@@ -8,12 +8,14 @@ using Clean.CORE.Services;
 using Clean.CORE.DTO;
 using AutoMapper;
 using Clean.API.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApplication1.Controllers
 {
 
 
     [ApiController]
+    [Authorize]
     [Route("api/employees")]
     public class EmployeeController : ControllerBase
     {

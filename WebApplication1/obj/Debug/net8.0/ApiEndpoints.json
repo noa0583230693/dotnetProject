@@ -19,7 +19,7 @@
     "Parameters": [
       {
         "Name": "assignment",
-        "Type": "Clean.CORE.Entities.IProjectAssignment",
+        "Type": "Clean.API.Models.ProjectAssignmentPost",
         "IsRequired": true
       }
     ],
@@ -56,7 +56,7 @@
       },
       {
         "Name": "updated",
-        "Type": "Clean.CORE.Entities.IProjectAssignment",
+        "Type": "Clean.API.Models.ProjectAssignmentPost",
         "IsRequired": true
       }
     ],
@@ -80,6 +80,22 @@
   },
   {
     "ContainingType": "WebApplication1.Controllers.ProjectAssignmentController",
+    "Method": "GetAssignmentsByEmployee",
+    "RelativePath": "api/assignments/by-employee/{employeeId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "employeeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApplication1.Controllers.ProjectAssignmentController",
     "Method": "GetAssignmentsByProject",
     "RelativePath": "api/assignments/by-project/{projectId}",
     "HttpMethod": "GET",
@@ -89,6 +105,22 @@
       {
         "Name": "projectId",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AuthController",
+    "Method": "Login",
+    "RelativePath": "api/Auth",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginModel",
+        "Type": "Clean.API.Models.LoginPost",
         "IsRequired": true
       }
     ],
@@ -106,7 +138,7 @@
   },
   {
     "ContainingType": "WebApplication1.Controllers.EmployeeController",
-    "Method": "AddEmployee",
+    "Method": "AddEmployeeAsync",
     "RelativePath": "api/employees",
     "HttpMethod": "POST",
     "IsController": true,
@@ -114,7 +146,7 @@
     "Parameters": [
       {
         "Name": "employee",
-        "Type": "Clean.CORE.Entities.Employee",
+        "Type": "Clean.API.Models.EmployeePost",
         "IsRequired": true
       }
     ],
@@ -122,7 +154,7 @@
   },
   {
     "ContainingType": "WebApplication1.Controllers.EmployeeController",
-    "Method": "GetEmployeeById",
+    "Method": "GetEmployeeByIdAsync",
     "RelativePath": "api/employees/{id}",
     "HttpMethod": "GET",
     "IsController": true,
@@ -138,7 +170,7 @@
   },
   {
     "ContainingType": "WebApplication1.Controllers.EmployeeController",
-    "Method": "UpdateEmployee",
+    "Method": "UpdateEmployeeAsync",
     "RelativePath": "api/employees/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
@@ -151,7 +183,7 @@
       },
       {
         "Name": "updated",
-        "Type": "Clean.CORE.Entities.Employee",
+        "Type": "Clean.API.Models.EmployeePost",
         "IsRequired": true
       }
     ],
@@ -159,7 +191,7 @@
   },
   {
     "ContainingType": "WebApplication1.Controllers.EmployeeController",
-    "Method": "DeleteEmployee",
+    "Method": "DeleteEmployeeAsync",
     "RelativePath": "api/employees/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
@@ -175,7 +207,23 @@
   },
   {
     "ContainingType": "WebApplication1.Controllers.EmployeeController",
-    "Method": "GetByRole",
+    "Method": "GetEmployeeWithAssignmentsAsync",
+    "RelativePath": "api/employees/{id}/assignments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApplication1.Controllers.EmployeeController",
+    "Method": "GetByRoleAsync",
     "RelativePath": "api/employees/by-role/{role}",
     "HttpMethod": "GET",
     "IsController": true,
@@ -185,6 +233,27 @@
         "Name": "role",
         "Type": "System.String",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApplication1.Controllers.EmployeeController",
+    "Method": "GetRecommendationsAsync",
+    "RelativePath": "api/employees/recommendations/{projectId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "requiredRole",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -209,7 +278,7 @@
     "Parameters": [
       {
         "Name": "project",
-        "Type": "Clean.CORE.Entities.Project",
+        "Type": "Clean.API.Models.ProjectPost",
         "IsRequired": true
       }
     ],
@@ -246,7 +315,7 @@
       },
       {
         "Name": "updated",
-        "Type": "Clean.CORE.Entities.Project",
+        "Type": "Clean.API.Models.ProjectPost",
         "IsRequired": true
       }
     ],
@@ -257,6 +326,38 @@
     "Method": "DeleteProject",
     "RelativePath": "api/projects/{id}",
     "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApplication1.Controllers.ProjectController",
+    "Method": "GetProjectByIdWithAssignments",
+    "RelativePath": "api/projects/{id}/assignments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApplication1.Controllers.ProjectController",
+    "Method": "GetProjectStability",
+    "RelativePath": "api/projects/{id}/stability-analysis",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -282,6 +383,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApplication1.Controllers.ProjectController",
+    "Method": "GetAllWithAssignments",
+    "RelativePath": "api/projects/with-assignments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   }
 ]

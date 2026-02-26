@@ -1,10 +1,41 @@
 {
-  "openapi": "3.0.4",
+  "openapi": "3.0.1",
   "info": {
-    "title": "Clean.API",
-    "version": "1.0"
+    "title": "My API",
+    "version": "v1"
   },
   "paths": {
+    "/api/Auth": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginPost"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginPost"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginPost"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/employees": {
       "get": {
         "tags": [
@@ -24,17 +55,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Employee"
+                "$ref": "#/components/schemas/EmployeePost"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Employee"
+                "$ref": "#/components/schemas/EmployeePost"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Employee"
+                "$ref": "#/components/schemas/EmployeePost"
               }
             }
           }
@@ -87,17 +118,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Employee"
+                "$ref": "#/components/schemas/EmployeePost"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Employee"
+                "$ref": "#/components/schemas/EmployeePost"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Employee"
+                "$ref": "#/components/schemas/EmployeePost"
               }
             }
           }
@@ -109,6 +140,29 @@
         }
       },
       "delete": {
+        "tags": [
+          "Employee"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/employees/{id}/assignments": {
+      "get": {
         "tags": [
           "Employee"
         ],
@@ -152,6 +206,36 @@
         }
       }
     },
+    "/api/employees/recommendations/{projectId}": {
+      "get": {
+        "tags": [
+          "Employee"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "requiredRole",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/projects": {
       "get": {
         "tags": [
@@ -171,21 +255,33 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Project"
+                "$ref": "#/components/schemas/ProjectPost"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Project"
+                "$ref": "#/components/schemas/ProjectPost"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Project"
+                "$ref": "#/components/schemas/ProjectPost"
               }
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/projects/with-assignments": {
+      "get": {
+        "tags": [
+          "Project"
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -234,17 +330,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Project"
+                "$ref": "#/components/schemas/ProjectPost"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Project"
+                "$ref": "#/components/schemas/ProjectPost"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Project"
+                "$ref": "#/components/schemas/ProjectPost"
               }
             }
           }
@@ -256,6 +352,29 @@
         }
       },
       "delete": {
+        "tags": [
+          "Project"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/projects/{id}/assignments": {
+      "get": {
         "tags": [
           "Project"
         ],
@@ -299,6 +418,29 @@
         }
       }
     },
+    "/api/projects/{id}/stability-analysis": {
+      "get": {
+        "tags": [
+          "Project"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/assignments": {
       "get": {
         "tags": [
@@ -318,17 +460,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/IProjectAssignment"
+                "$ref": "#/components/schemas/ProjectAssignmentPost"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/IProjectAssignment"
+                "$ref": "#/components/schemas/ProjectAssignmentPost"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/IProjectAssignment"
+                "$ref": "#/components/schemas/ProjectAssignmentPost"
               }
             }
           }
@@ -381,17 +523,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/IProjectAssignment"
+                "$ref": "#/components/schemas/ProjectAssignmentPost"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/IProjectAssignment"
+                "$ref": "#/components/schemas/ProjectAssignmentPost"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/IProjectAssignment"
+                "$ref": "#/components/schemas/ProjectAssignmentPost"
               }
             }
           }
@@ -409,6 +551,29 @@
         "parameters": [
           {
             "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/assignments/by-employee/{employeeId}": {
+      "get": {
+        "tags": [
+          "ProjectAssignment"
+        ],
+        "parameters": [
+          {
+            "name": "employeeId",
             "in": "path",
             "required": true,
             "schema": {
@@ -450,13 +615,9 @@
   },
   "components": {
     "schemas": {
-      "Employee": {
+      "EmployeePost": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
           "fullName": {
             "type": "string",
             "nullable": true
@@ -468,13 +629,23 @@
         },
         "additionalProperties": false
       },
-      "IProjectAssignment": {
+      "LoginPost": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
+          "userName": {
+            "type": "string",
+            "nullable": true
           },
+          "password": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProjectAssignmentPost": {
+        "type": "object",
+        "properties": {
           "projectId": {
             "type": "integer",
             "format": "int32"
@@ -490,13 +661,9 @@
         },
         "additionalProperties": false
       },
-      "Project": {
+      "ProjectPost": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
           "name": {
             "type": "string",
             "nullable": true
@@ -504,28 +671,23 @@
           "description": {
             "type": "string",
             "nullable": true
-          },
-          "assignments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/IProjectAssignment"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": false
       }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Enter JWT token like: Bearer {token}",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
     }
   },
-  "tags": [
+  "security": [
     {
-      "name": "Employee"
-    },
-    {
-      "name": "Project"
-    },
-    {
-      "name": "ProjectAssignment"
+      "Bearer": [ ]
     }
   ]
 }
